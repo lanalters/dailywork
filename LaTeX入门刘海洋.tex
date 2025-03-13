@@ -3,19 +3,53 @@
 % 描述：从 25week10 开始学习，因此资源存放在 25week10。
 \documentclass[UTF8]{ctexart}
 
-\usepackage{graphicx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               package                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{文档标题}
-\author{Lan}
-\date{\today}
+%%%%%%%%%%
+%  作者  %
+%%%%%%%%%%
+\usepackage{authblk} % 多作者
+\renewcommand\Authfont{\normalsize}      % 作者名字保持正常字号
+\renewcommand\Affilfont{\scriptsize}     % 机构名称使用较小字号
+%%%%%%%%%%%%
+%  超链接  %
+%%%%%%%%%%%%
+\usepackage{hyperref} % 网页超链接
 
+%%%%%%%%%%%%%%%%%%
+%  实现对勾和叉  %
+%%%%%%%%%%%%%%%%%%
+\usepackage{pifont} % 对勾和叉
+\newcommand{\cmark}{\ding{51}} % 对勾
+\newcommand{\xmark}{\ding{55}} % 错误标记
+
+%%%%%%%%%%%%%%
+%  参考文献  %
+%%%%%%%%%%%%%%
 \bibliographystyle{plain}
 
+%%%%%%%%%
+%  mkt  %
+%%%%%%%%%
+\title{\LaTeX 入门刘海洋}
+\author[1,2]{Lan \footnote{Email: lanalters@mail.ustc.edu.cn, Student ID: SA24168214}}
+\affil[1]{中国科学技术大学, 合肥 230026}
+\affil[2]{中国科学院合肥物质科学研究院\,等离子体物理研究所, 合肥 230031}
+\date{\today}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               content                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 \maketitle
 \tableofcontents
-
 
 IATEX入门
 電子工業出版社
@@ -29,6 +63,7 @@ ISBN 978-7-121-20208-7
 定价：79.00元
 Broadview	博文视点·IT出版旗舰品牌
 www. broadview. com. cn	技术凝聚实力·专业创新出版
+
 本书从介绍TEX到IATEX的发展开始，详细讲述了使用IATEX撰写科技文档以及幻灯片演示的基本方法和技巧。书的内容深入浅出，对于IATEX初学者以及科技工作者都是一本很好的参考书籍。
 刘利刚，中国科学技术大学，教授
 本书两大特色，“全”与“新”：不仅全面涵盖了LATEX的基础知识，而且包含了近几年IATEX的最新发展，内容丰富，层次分明，是一本很好的新手入门教程，对有一定使用经验的老手而言，也是一本完善的案头参考书。
@@ -300,7 +335,7 @@ xiv
 索引⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯⋯542
 
 \section{熟悉 LaTeX}
-\label{sec:熟悉 LaTeX}
+\label{sec:熟悉LaTeX}
 
 \LaTeX 是一种基于 \TeX 的文档排版系统。
 TEX只这么交错起伏的几个字母，便道出了“排版”二字的几分意味：精确、复杂、注重细节和品位。
@@ -328,30 +363,35 @@ ETEX相对原始的TEX更少关注排版的细节，因此ETEX在很多时候并
 现在我们使用的ETEX格式版本为28，意思是超出了第2版，接近却没有达到第3版，因此写成IATEX2E。
 在只能使用普通字符的场合，一般写成LaTeX2e.
 
-\subsection{让 \LaTeX 跑起来}%
+\subsection{让 \LaTeX 跑起来}
 \label{sub:让LaTeX跑起来}
 
-学习ETEX的第一步就是上手试一试，让ETEX跑起来。
+学习 \LaTeX 的第一步就是上手试一试，让 \LaTeX 跑起来。
 首先安装TEX系统及其他一些必要的软件，然后跑一个测试的例子。
 下面的几节包含了一大堆具体软件安装和使用的内容，虽然有些烦琐，但这是使用BTEX进行写作的必要前提。
 如果你早已做好这些准备，或者在读本书以前就已经迫不及待地做了不少尝试的话，可以直接跳到第32页1.2节开始第一个实际规模的例子。
 
-\subsubsection{让 \LaTeX 跑起来}%
-\label{sub:让LaTeX跑起来}
+\subsubsection{\LaTeX 发行版及其安装}
+\label{subsub:LaTeX发行版及其安装}
 
-1.1.1 IATEX的发行版及其安装
-TEX/ETEX并不是单独的程序，现在的TEX系统都是复杂的软件包，里面包含各种排版的引擎、编译脚本、格式转换工具、管理界面、配置文件、支持工具、字体及数以千计的宏包和文档。一个TEX发行版(Distribution)就是把所有这样的部件都集合起来，打包发布的软件。
+
+\TeX/\LaTeX 并不是单独的程序，现在的 \TeX 系统都是复杂的软件包，里面包含各种排版的引擎、编译脚本、格式转换工具、管理界面、配置文件、支持工具、字体及数以千计的宏包和文档。
+一个 \TeX 发行版 (Distribution) 就是把所有这样的部件都集合起来，打包发布的软件。
 尽管内容庞杂，但现在的TEX发行版的安装还是非常方便的。下面将介绍两个最为流行的发行版，一是1.1.1.1节的CTEX套装，二是1.1.1.2节的TEX Live.前者是
+
 ①Leslie Lamport博士，微软研究院资深研究员, Dijkstra奖得主。
-1
-第1章	熟悉ETEX	3
-Windows系统下的软件，后者则可以用在各种常见的桌面操作系统上。对Windows用户来说，两个发行版并没有显著的优劣之分，你可以任选一个安装使用。
+
+Windows系统下的软件，后者则可以用在各种常见的桌面操作系统上。
+对Windows用户来说，两个发行版并没有显著的优劣之分，你可以任选一个安装使用。
 请注意：下面介绍的发行版都是在写作本书时最新的版本。然而当你读到这一段时，软件可能已经更新，界面也可能会有些不同。不过不用担心，安装的过程和使用方法大体上都是一样的。
+
 1.1.1.1 CTEX套装
+
 CTEX套装是由中国科学院的吴凌云制作并维护的一个面向中文用户的Windows系统下的发行版。这个发行版事实上是对另一个发行版MiKTEX的再包装，除了MiKTEX主体以外, CTEX套装增加了WinEdt作为主要编辑器，以及PDF预览器SumatraPDF,PostScript文件预览器GSview, PostScript解释器GhostScript, 一些旧的中文支持包和工具（如CCT系统）和其他一些有关中文的额外配置（如额外中文字体配置）。
 CTEX套装或许是中文ETEX用户最常用的发行版了。它一直以安装简单、容易上手著称。CTEX套装有基本版和完全版之分，基本版只包含一些基本安装的MiKTEX系统，实际使用中缺少的宏包会在编译时自动下载安装，或由用户自己选择手工安装；而完全版则包含了完整的MiKTEX所有组件。对于一般用户，建议使用完全版的CIEX套装，这不仅避免了编译时因缺少宏包还要临时下载的问题，而且完全版中包含的诸多文档资料对于用户也很有用。只要从http://www.ctex.org/CTeXDownload下载对应版本的安装文件，就可以直接进行安装，见图1.1.
 CTEX套装安装好后，会在“开始”菜单增加一个项目，里面有多个子项目。其中WinEdt①和MiKTeX目录下的TeXworks是最主要的ETEX编辑器，多数时间我们都将在这两个编辑器之中工作。如果你已经完成安装，现在就可以跳到第13页1.1.2节开始熟悉使用编辑器了。
 “开始”菜单中的其他项目也值得注意。
+
 FontSetup
 为CTEX套装重新安装CJK宏包使用的中文字体。CTEX套装使用Windows操作系统所安装的中文字体进行配置，默认支持宋体、黑体、仿宋、楷体、隶书、幼圆6种，其中前4种是中文版Windows预装的字体，后两种是中文版Office系统预装的字体。如果系统没有安装对应的字体，则不能进行配置安装。
 08Uninstall CTeX
@@ -416,7 +456,7 @@ Ghostgum
 这个目录里面是PostScript文件. ps和. eps的查看工具GSview①, 类似于TEX Live中的PS View.也可以用它来查看PDF文件，不过效果没有Adobe Reader好.安装后. ps和. eps文件会与这个程序关联。
 Help
 里面是一些由CTEX套装所附带的额外的帮助文档。包括一个常见问题集[[308](CTeX FAQ)、《IETEX28插图指南》[204](Graphics)、一个入门文档lshort[187]
-__
+
 ①GSview是一个发布于AFPL协议下的开源免费软件，运行时可能会有注册的弹窗，但软件本身是无须注册的，不影响使用。
 1
 第1章	熟悉ETEX	5
@@ -431,9 +471,8 @@ Package Manager
 MiKTEX选项(MiKTeX Options)里面是一些关于MiKTEX发行版的整体配置。
 在General选项卡中，可以刷新文件名数据库(Refresh FNDB)或更新格式(Update Formats)，这通常用在手工安装或更新了宏包和工具的时候；可以设置默认的纸张大小；也可以设置在编译时缺少宏包时是不是自动在线安装（这是MiKTEX系统的特色功能）。
 在Roots选项卡中，可以查看、改变或增加TEX的根目录。每个TEX根
-1
-6
-1.1 让EIEX跑起来
+
+\begin{verbatim}
 MiKTeX Package Manager
 Edit	View	IaskRepository Help
 Name:	Keywords:	Fle name:	Filter	Reset
@@ -453,6 +492,8 @@ mflogo	\Fonts\METAFONT Fonts	53183	2001-05-14	2009-09-12	LaTeX support
 mfnfss	\Formats\LaTeX\LaTeX contrib	70253	2001-05-14
 mfpic	\Applications\Graphics	2211195	2009-11-27	Draw MetaFont,
 mfpic4ode	\Formats\LaTeX\LaTeX contrib	579177	2009-04-21	Macros to drav
+\end{verbatim}
+
 Total:1798
 (a)包管理器(Package Manager)
 MiKTeX Options
@@ -503,9 +544,13 @@ Formats选项卡用来管理TEX系统的编译格式。TEX和相关的宏语言�
 Language选项卡可以管理一些语言（不包括中文，主要是西方语言）的支持文件。Packages选项卡与包管理器的功能类似。可以查看和修改已安装的MiKTEX包。
 88Update MiKTeX
 这是MiKTEX的升级程序，可以用于更新宏包或升级整个MiKTEX系统。CTEX套装的主体就是MiKTEX，因此可以不重装CTEX套装，直接使用MiKTEX的升级程序完成除旧式中文支持和编辑器配置外的大部分升级工作。
+
 1.1.1.2 TEX Live
-TEX Live是由TUG(TEX User Group, TEX用户组)发布的一个发行版。TEX Live可以在类UNIX/ Linux、Mac OS X和Windows等不同的操作系统平台下安装使用，并且提供相当可靠的工作环境①。TEX Live可以安装到硬盘上运行，也可以经过便携(portable)方式安装刻录在光盘上直接运行（故有“Live”之称）。
+
+TEX Live 是由 TUG(TEX User Group, TEX 用户组) 发布的一个发行版。TEX Live可以在类UNIX/ Linux、Mac OS X和Windows等不同的操作系统平台下安装使用，并且提供相当可靠的工作环境①。TEX Live可以安装到硬盘上运行，也可以经过便携(portable)方式安装刻录在光盘上直接运行（故有“Live”之称）。
+
 有两种安装TEX Live的方式：一是从TEX Live光盘进行安装，二是从网络在线安装。不同操作系统下安装设置TEX Live的方式基本一样，这里仍以Windows操作系统为例进行演示。
+
 一、从光盘安装
 TEX Live一般以安装光盘镜像的方式在互联网上发布。光盘镜像文件可以从TUG②或CTAN③网站上下载。可以把镜像文件刻录到DVD光盘上使用，也可以直接加载到
 ①例如在中文支持方面，旧版本MiKTpX的中文字体配置一直有一些错误，所以CTEX套装做了进一步配置才正确支持中文；而TEX Live就没有这种问题。
@@ -521,7 +566,9 @@ TeX Live 2012安装
 符包含整个安装的目的文件夹。
 强烈建议以年份作为最后的目录项。
 目的文件夹：
+\begin{verbatim}
 C:\textive\2012
+\end{verbatim}
 修改
 需要的磁盘空间3246MB
 退出
@@ -531,9 +578,7 @@ C:\textive\2012
 如果对TEX系统已经比较熟悉，还可以运行光盘根目录的install-tl-advanced. bat进行可定制安装（见图1.4）。此时，除了安装的位置以外，还可以从预置的几种安装方案中选择某种进行安装，可以选择安装的语言、宏包、工具、文档集合，或进行进一步的安装配置。例如，如果要在服务器上安装后台服务，不想让TEX系统占用太大的空间，可以去掉所有的文档和源代码，只选择安装少量必需的宏包和工具，只用原来几分之一的硬盘空间安装一份基本可用的系统。
 对于Linux系统的用户，还需要设置环境变量并为XgTEX配置字体。设置Linux环境变量的方式参见[25，§3.4]，我建议偷懒的用户在安装时选择在标准路径下创建符号链接的选项，这样就不必设置环境变量了。下面则需要为XgTEX配置字体，让操作系统的fontconfig库能找到TEX Live附带的字体，按下面步骤操作：
 1. 进入TEX Live的TEXMFSYSVAR/ fonts/ conf/目录(其中TEXMFSYSVAR是一个变量，在定制安装时选定。其默认值为/ usr/ local/ texlive/2012/ texmf-var/),将里面的texlive-fontconfig. conf文件改名为09-texlive. conf, 复制到/ etc/ fonts/ conf. d/目录。可以在命令行下(参见1.1.2.3节)执行命令：
-1
-第1章	熟悉ETEX	9
-✗
+ve
 74 Install-tl
 TeX Live 2012安装
 ——基本信息——
@@ -548,6 +593,7 @@ scheme-full
 85集合来自 85（需要的磁盘空间3246 MB）
 ——目录设置——
 Portable setup
+\begin{verbatim}
 否
 切换
 TEXDIR（主 TeX目录）
@@ -600,7 +646,9 @@ v27178/26745
 安装 TeXLive
 退出
 图1.4 定制安装 TEX Live 2012
+\end{verbatim}
 sudo cp / usr/ local/ texlive/2012/ texmf-var/ etc/ fonts/ texlive-fontconfig. conf \/ etc/ fonts/ conf. d/09-texlive. conf
+
 2. 刷新fontconfig的字体缓存，执行命令：
 sudo fc-cache -fsv
 如果一切正常，你会看到屏幕上提示缓存了TEX Live一些目录中的字体。
@@ -608,23 +656,31 @@ sudo fc-cache -fsv
 此外，如果希望pdfTEX、dvipdfmx等程序能正确找到操作系统中安装的字体，或让XqTEX能按字体文件名找到系统字体，还需要设置正确的OSFONTDIR变量。TEX Live会对Windows系统自动设置这一变量，对Linux等系统也需要手工修改。新建或修改在TEX Live安装目录(如/ usr/ local/ texlive/2012/)下的配置文件texmf. cnf,在里面修改OSFONTDIR变量的值，典型的值如：
 OSFONTDIR = / usr/ share/ fonts//;/ usr/ local/ share/ fonts//;~/. fonts//
 1
+
 10	1.1 让ETEX跑起来
-程序安装好后，会在桌面上增加TEX编辑器TeXworks和PostScript文件查看工具PS View的图标①，现在就可以进行工作了。
-TEX Live的开始菜单相对简单。它包括以下项目：
+
+程序安装好后，会在桌面上增加 TEX 编辑器 TeXworks 和 PostScript 文件查看工具 PS View 的图标，现在就可以进行工作了。
+
+\TeX Live的开始菜单相对简单。
+它包括以下项目：
 TeXworks editor
 这是TEX Live预装的一个的TEX文件编辑器，简单方便。大部分工作都可以在这个编辑器中完成。
 DVIOUT DVI viewer
 这是一个DVI文件预览器，类似于MiKTEX中的Yap.不过我们很少会用到它。
-PS View
+\verb|PS_View|
 这是PostScript文件查看工具，和桌面上的图标一样。也可以用它来查看PDF文件，不过效果没有Adobe Reader好。安装后 . ps和. eps文件会与它关联。
 TeX Live command line
 它打开Windows的命令提示符(参见1.1.2.3节)，并设置好必要的环境变量，可以在其中使用命令行编译处理TEX文档。
 TeX Live documentation
 这是一个HTML页面的链接，里面是TEX Live系统中所有PDF或HTML格式的文档列表。在首页你可以找到几种语言（包括简体中文）的TEX Live发行版文档，以及到近2000份各种文档的列表的链接———这份有一公里长的列表多少说明了TEX Live是一个多么复杂的系统，以及它在完全安装时为什么占用了这么大的空间。当然，你不需要读完里面的所有文档才能学会使用IATEX，不过你会发现在工作中总需要时不时地查看里面的东西（参见8.3.1节）。
+
 TeXdoc GUI
 这是一个常用文档的列表，不过以图形界面的方式把文档分成若干类别，还可以搜索（见图1.5）。这里面直接列出的宏包数量较少，用来简单浏览可以，但如果要查看更多的内容，最好使用其文件搜索功能或利用命令行texdoc工具（参见8.3.1节）。
-153	TeX Live Manager
-这是TEX Live管理工具的图形界面（见图1.6），简称tlmgr.管理工具也可以在命令行下用tlmgr命令运行，用tlmgr gui可以在命令行下打开图形界面。
+
+TeX Live Manager
+这是 \TeX Live 管理工具的图形界面（见图1.6），简称 \verb|tlmgr|。
+管理工具也可以在命令行下用 \verb|tlmgr| 命令运行，用 \verb|tlmgr gui| 可以在命令行下打开图形界面。
+
 ①TeXworks和PS View是在Windows下安装的附加软件。在其他操作系统如Linux中，通常都已经安装或容易从其他途径安装类似的软件，如Kile和Evince.
 1
 第1章	熟悉ETEX	11
@@ -711,9 +767,16 @@ http://ftp.ctex.org/mirrors/CTAN/systems/texlive/tlnet/
 1
 第1章	熟悉ETEX	13
 默认情况下，安装程序会自动选择较近的CTAN镜像服务器，不过教育网用户可能不方便访问国外的网站，需要在命令行手工指定国内的CTAN镜像服务器地址。例如运行如下命令从CTEX网站安装TEX Live:
+\begin{verbatim}
 install-tl -repositoryhttp://ftp.ctex.org/mirrors/CTAN/systems/texlive/tlnet/
-1.1.2  编辑器与周边工具
+\end{verbatim}
+
+\subsubsection{编辑器与周边工具}
+\label{subsub:编辑器与周边工具}
+
+
 1.1.2.1 编辑器举例———TeXworks
+
 像其他计算机语言一样，ATEX使用纯文本描述，因而任何能编辑纯文本的编辑器都能编辑ETEX文档，如Windows系统的记事本、写字板, Linux下的VI、GEdit.不过，使用专门为IATEX设计或配置的编辑器，进行语法高亮、命令补全、信息提示、文档排版等工作，会使工作方便许多。
 IATEX代码编辑器有很多，大致可以分为两类：一是主要为TEX/IATEX代码编辑而专门设计的编辑器，二是可以为TEX/ETEX代码编辑配置或安装插件的通用代码编辑器。前者如WinEdt、TeXworks、TeXMaker、Kile, 后者如Emacs、VIM、Eclipse、SciTE等.通常前一种编辑器配置和使用更简单些，下面主要以TeXworks为例说明编辑器的一些简单配置。其他大部分编辑器在基本功能和设置上都大同小异，不难举一反三。
 TeXworks是MiKTEX和Windows系统下TEX Live预装的编辑器，也是国际TEX用户组(TUG)发布并推荐的入门级编辑器。Linux系统下TEX Live没有自动安装TeXworks编辑器，你可以到TeXworks的网站①自己下载安装。
@@ -721,5 +784,789 @@ TeXworks的界面非常简洁（见图1.7）：它分为两部分，左侧是TEX
 除了文本编辑区，编辑器窗口中最常用的是工具栏。工具栏的最左边的按钮是整个编辑器最为重要的“排版”按钮，它调用具体的命令把输入的TEX源文件编译为对应的PDF结果，刷新右边PDF文件的显示。紧靠排版按钮右边的下拉菜单用来选择排版时所使用的命令，通常对应一条单一的命令（如TEX Live中的版本或自己单独下载安装的版本），但也可以配置为好几条复合命令(如CTEX套装或纯MiKTEX中的版本)。通常我们使用最多的排版命令是“XeLaTeX”或“PDFLaTeX”，视具体情况而定。使用排版按钮时，未保存的文档会自动保存。工具栏剩下的按钮则是一系列常见的标准按钮：新建、打开、保存；撤销、重做；剪切、复制、粘贴；查找和替换，不必多说。
 ①http://code.google.com/p/texworks/
 
+\begin{verbatim}
+14	1.1让ETEX跑起来
+1. tex·TeXworks
+1. pdf-TeXworks
+文件
+编辑
+搜索
+格式
+排版
+脚本
+窗口
+帮助
+文件
+编辑
+搜索
+视图
+排版
+脚本
+窗口
+帮助
+XeLaTeX+HakeIndex+BibTeX
+\documentclass[UTF8]{ctexart}
+\begin{document}
+1 文字
+\section{文字}
+1 文字
+特可爱排版。|
+特可爱排版。
+\section{公式}
+2 公式
+\[
+a^2 + b^2 = c^2
+a^{2} + b^{2} = c^{2}
+\]
+\end{document}
+行6 of 13;列6
+100%
+第1页	共1页
+图1.7 CTEX套装中的TeXworks界面
+PDF预览窗口的工具栏也是一排按钮。最前面的排版按钮与编辑区的功能一样。右面是4个向前后翻页的按钮；而后是显示比例的按钮；再后面是放大工具、滚屏工具；最后是PDF文本查找工具。
+使用TeXworks也非常简单：
+1.在编辑区输入TEX源文件（如在图1.7中的编辑区看到的就是一个简单的例子）；
+2.单击“保存”按钮，给源文件起名并保存在正确的位置(如1. tex);
+3.在排版按钮旁的下拉菜单中选择“XeLaTeX”，单击排版按钮，查看结果。
+编译时在文本编辑区下方的“控制台输出”面板会显示编译进度和信息。如果编译过程有错误或提示输入，程序会停下来等待处理。如果编译结束无误，控制台输出面板会自动关闭，而在预览窗口会显示新的PDF的结果。
+在文本编辑区或PDF预览区用Ctrl加鼠标左键单击可以从源文件查找PDF文件的对应位置；或反过来从PDF文件查找TEX源文件的位置。这个功能称为TEX文档的正反向查找，对编写长文档特别有用。正反向查找是由SyncTeX机制实现的，需要源代码编辑器、PDF阅读器和TEX输出程度的共同参与，一些旧的发行版或程序可能并不支持。
+TeXworks支持自动补全功能。输入一个助记词或命令的一部分，再按Tab键，则TeXworks会根据配置补全整个命令或是环境；连续按Tab键可以切换补全的不同形式。例如，输入\doc再按Tab键，会补全命令\documentclass{}; 使用beq补全则可以得到公式环境：
+1
+第1章熟悉ETEX	15
+\begin{equation}
+\end{equation}·
+光标移动在环境中央等待输入，再次按下Ctrl+Tab组合键则可以跳转到后面的圆点处继续下面内容的输入，而不需要使用方向键。
+下面来看TeXworks中的一些常见的配置。
+刚刚安装的TeXworks通常会使用很小的字体，而且可能没有语法高亮等功能，给编辑工具带来许多不便。在TeXworks的“格式”菜单中，“字体”项可以用来临时更改显示的字体，而“语法高亮显示”项可以临时控制如何进行语法高亮。如图1.7中设置的就是12磅的Consolas字体。要使字体和语法高亮的设置对所有文档生效，则应该改变TeXworks的默认选项。单击TeXworks“编辑”菜单的最后一项“选项”，将弹出TeXworks首选项窗口（见图1.8）。在“编辑器”选项卡中，可以设置编辑器默认的字体及字号，下面则有语法高亮、自动缩进等格式。
+TeXworks 首选项
+?
+✗
+一般
+编辑器
+预览
+排版
+脚本
+编辑器默认
+Consolas
+12磅
+Tab 宽度：
+32像素
+行号
+自动换行
+语法高亮：
+LaTeX
+自动缩进模式：
+无
+智能引号模式：
+无
+拼写检查语言：
+无
+编码：
+全局编辑器选项
+☑高亮显示当前行
+注：以上为默认设置。改变它们不会影响现有已打开窗口。可以通过修改“格式”菜单中的对应菜单项来改变现有窗口的设定。
+恢复默认
+确定
+取消
+图1.8 TeXworks 编辑器选项设置
+TeXworks支持多种语言界面和多种文字编码。TeXworks默认的界面会与操作系统的默认语言(Locale设置)一致，可以在选项设置窗口的“一般”(General)选项卡中设置程序的界面语言为中文。在“编辑器”选项卡中则有“编码”选项（见图1.8），一般应该选择TeXworks的默认值，即UTF-8编码，编辑器保存和打开文件将默认使用此
+1
+16	1.1  让ETEX跑起来
+编码。
+TeXworks选项设置窗口的“排版”选项卡（见图1.9）可以用来设置TeXworks的“排版”按钮所执行的命令。在图1.9(a)中选择对应的处理工具，单击“编辑…”按钮，就可以在弹出的窗口（见图1.9(b)）中设定对应的命令及参数。参数中使用的变量，可参见TeXworks的帮助文档。
+TeXworks首选项
+配置工具
+般
+编辑器
+预览
+排版
+脚本
+名称：
+pdfLaTeX|
+TeX 及相关程序路径
+程序：
+pdflatex. exe
+C:/ texlive/2011/ tlpkg/ texworks
+c:\textlive\2011\tlpkg\tlgs\bin
+参数：
+$ synctexoption
+c:\texlive\2011\tlpkg\tlperl\bin
+$ fullname
+C.\Droneram Filec\ImaneManirk-672-016
+处理工具
+LaTeXmk
+pdfTeX
+编辑·
+pdfLaTeX
+XeTeX
+默认：
+XeLaTeX
+隐藏输出面板：
+自动
+运行后查看 PDF文件
+恢复默认
+确定
+取消
+确定
+取消
+(a) TeXworks排版选项
+(b)TeXworks 工具配置：PDFLaTeX
+图 1.9 TeXworks排版选项设置
+文字编码与Unicode
+在使用TEX编辑器时，必须注意的是文档保存的文字编码。如果编码使用错误，轻则遇到“乱码”，重则干脆程序运行错误。我们前面所说的“UTF-8”编码，就是现在最为常用的编码之一。
+文字在计算机内部都是以数字的形式表示、存储和传输的，人们圈定一些在计算机中使用的字符，称为字符集(character set)，一个字符通常就用它在字符集中的序号来表示。不过由于在计算机中数字的二进制表示也有不同的格式，因而相同的字符集也可能有不同的二进制表示方式，也就是字符编码(character encoding).IBM公司以前给自己系统中每种编码编一个号，即所谓代码页(code page)，后来其他计算机厂商如微软、Oracle都把自己的字符编码用代码页的方式给出，不过使用的代码页编号都不一样。我们通常见到的代码页，都是微软公司的编号。字符集、字符编码、代码页这些概念，在
+1
+第1章	熟悉ETEX	17
+很多时候都不加区分，可以混用。
+最早的字符编码可以追溯到前计算机时代的电脑码，莫尔斯码(Morse code)和国际二号电码(ITA2)是以前最常用的电报编码。莫尔斯码是变长编码，常用字符短些，不常用的长些；国际二号电码则是定长编码，一共32个字符，每个字符用5位滴答表示（相当于5位二进制数）。汉字电报码是1869年发明的，以后略加修改，用4位十进制数表示一个汉字，直到今天汉语电报还用的是这套编码（不过现在还用电报的人已经几乎没有了）。
+计算机领域早期编码的典范是美国信息交换标准代码(American Standard Code for Information Interchange), 也就是大名鼎鼎的ASCII编码。ASCII使用7位二进制数表示128个符号（包括数字、字母、标点符号和一些控制符）。现代计算机使用8位的字节，用一个字节表示一个符号，可以把剩下的一位用作校验，也可以扩展为256个符号，表示其他一些西方语言中的字符或图形符号。ASCII码可算是计算机中使用最为广泛的编码方式，高德纳最早的TEX程序使用的就是8位ASCⅡ编码处理文档。
+除了IBM等大公司在不断为不同的语言发展不同的字符集和编码，国际标准化组织 (ISO)也试图确定标准的 ACSII扩展方式，于是有了 ISO 8859标准.ISO 8859给不同的字母语言使用不同的扩展编码，实际产生了16种编码，如ISO 8859-1（西欧）、ISO8859-2（中欧）、ISO 8859-5（西里尔字母，如俄语）。为不同的语言使用不同的扩展方式，在当年大约是为了把编码限定在一个字节之内，不过现在看来几乎是在把水搅浑，因为不同的编码实在是太多了。
+8位编码并不足以表示像汉字这样庞大的字符集。中国、日本和韩国这些使用表意文字的国家都纷纷推出自己的字符集。中国于1980年推出了国家标准GB2312, 包括7445个字符，其中有6763个汉字; GB2312字符集通常使用EUC-CN编码，也常被称为GB2312编码。这些字符用来排版当然不够用（方正公司就为自己的产品研发了专用的748编码），1993年发布了与Unicode 1.1相当的GB 13000.GB 13000没有得到推广，实际应用的却是与GB13000字符数量相当的GBK（K是扩展的意思），有21886个字符.GBK编码不是正式标准，然而应用十分广泛，Windows95之后的微软操作系统都支持GBK编码。2000年3月又发布了标准GB18030-2000, Windows XP就支持这一字符集；2005年11月的GB18030-2005则成为强制执行的标准，于是从Windows Vista之后的版本都是基于GB 18030编码的系统。GB 18030两个版本的字符集实际来自Unicode 3.0和4.1,前者包括27533个字符，后
+1
+18	1.1 让ETEX跑起来
+者包括76556个字符。GB18030到GBK到GB2312到ASCⅡ, 编码都是向下兼容的。
+ISO于1990年推出了通用字符集(Universal Character Set, UCS) 标准ISO 10646, 包括UCS-2和UCS-4两种长度的编码；1991年一个叫做通用码协会(Unicode Consortium) 的组织发布了Unicode 1.0标准。两个组织都打算把全世界所有文字的符号都用同一套字符集和编码统一起来。后来两个组织协作起来，从Unicode 2.0起, Unicode就符合ISO 10646了。2012年1月发布的Unicode 6.1已经定义了110181个字符，包括世界上100种文字，而且还在不断修订扩充之中。Unicode已渐次成为字符编码的新方向，包括GB 18030也可以看做是Unicode字符集的一种编码格式。除了UCS-2和UCS-4, Unicode标准还提出了多种编码形式，称为Unicode交换格式(Unicode Transformation Format,UTF): 主要包括变长的UTF-8、UTF-16和定长的UTF-32编码。UTF-8编码与ASCII编码向下兼容，因而最为常用。
+TEX系统原本只支持ASCII编码。但只要设置好超过127的数字对应的符号，所有扩展ASCII编码都能正确排版，如ISO 8859的各种标准。汉字编码GB2312、GBK和UTF-8都是兼容ASCII的多字节编码，因而在IATEX中通过CJK宏包也可以通过特殊的方式，把多个字符对应到一个汉字上，支持中文的排版。
+CJK宏包这种支持多字节编码的方法是一种黑客手段。后来TEX的新实现XqTEX和LuaTpX都直接支持UTF-8编码，新的中文排版方式也自2007年起随着这两种新排版引擎应运而生。LualETEX的本地化支持目前还暂处在起步阶段，本书将着重介绍基于XqTEX的方式。
+1.1.2.2 PDF阅读器
+CTEX套装和TEX Live都已经预装了DVI文件和PostScript文件的阅读器。然而却没有安装最重要的PDF格式阅读器。现在使用TEX系统基本上最终都将输出PDF格式的结果，而且TEX系统中的大部分文档也都是PDF格式的，因此一个PDF阅读器是不可或缺的。
+PostScript阅读器GSview和PS View也都可以当做PDF阅读器来使用，不过效果不是很好。我们使用PDF阅读器主要有两个目的，一是在编辑文档过程中随时查看编译的效果，这对于编辑复杂公式、插图以及幻灯片来说都非常重要；二是为了阅读PDF格式的文档资料，或查看自己编写文档的最终效果。这两个目的各有不同的要求，前者
+1
+第1章	熟悉ETEX	19
+要求快捷方便，最好还能在PDF的效果与TEX源文件之间方便地切换检索；后者则要求显示准确美观、功能全面。
+要满足第一个要求，编辑器TeXworks内置的显示功能最为方便（见图1.7）.TeXworks把源代码和PDF结果左右排开，对照显示，TEX代码编译后右边的PDF文件就会更新。而且可以用Ctrl加鼠标左键单击进行从源文件到PDF文件或从PDF文件到源文件的正反向查找。
+CTEX套装还预装了SumatraPDF阅读器用来在WinEdt中预览TEX文件的编译结果。SumatraPDF是一个很小的PDF阅读器，同样支持用鼠标双击进行PDF的反向搜索。
+CTEX套装和TEX Live都没有预装能满足第二个要求的阅读器。我们建议使用Adobe Reader最新的版本(在Linux系统中通常称为acroread).Adobe Reader是官方免费提供的PDF格式的阅读器，通常它的显示效果最好，支持全面的PDF特性（如JavaScript脚本、动画、3D对象等，而且这些很可能在LTEX制作的幻灯中用到）。其他一些常见的PDF阅读器，如Foxit Reader，则可能在一些功能上有所欠缺。
+如果你还没有安装Adobe Reader，可以直接从Adobe的官方网站，或几乎任何软件下载站点得到并安装。不必抱怨它占用上百MB的安装空间：除了一些高级功能的插件，Adobe Reader还提供了许多种高质量的OpenType中西文字体，这些都可以在你未来的排版中用到。
+PS格式和PDF格式
+PS是PostScript的简称。PostScript是Adobe公司于1984年发布的一种页面描述语言，自1985年苹果公司的LaserWriter打印机开始，此后的很多高档激光打印机都带有PostScript语言的解释器，可以直接打印PostScript语言描述的文档。PostScript遂逐渐成为电子与桌面出版的标准格式，并一直延伸到整个出版业，风靡一时。就连国内的北大方正公司的排版系统也是以变形的PostScript格式输出，并沿用至今。
+"PostScript”这个名字多少体现了这个语言的特点：它是一种基于后缀表达式和栈操作的解释型计算机语言[4]。如表达式1+2就被写成
+1 2 add
+而
+0 0 moveto
+100 100 lineto
+1
+20	1.1 让ETEX跑起来
+则是在描述从坐标(0，0)到(100，100)的直线路径。使用这种后缀语法原本是为了方便计算机芯片高效解释PostScript这种复杂的语言，大部分PostScript也都是由其他计算机程序自动生成的。不过，富于经验的老手可以就凭着这种看起来有些怪异的语法直接画出图来，这种技艺也一直延伸到5.5.2节将要讲到的PSTricks宏包。
+PostScript拥有强大的图形能力，可以用一段PostScript语言的代码表示很复杂的图形。然而作为一门完整的计算机语言PostScript过于复杂，因而有了所谓封装的PostScript(Encapsulated PostScript)格式，即EPS格式。EPS格式的文件也是一段PostScript代码，但只能表示一页，而且加上了诸多限制，成为一种专门用来存储可以嵌入其他应用中的图形格式。TEX的许多输出引擎都支持这种图形格式，我们将在5.2节回到这个话题。
+由于在电子出版领域的地位，PostScript一度成为TEX系统最重要的输出格式，至今在网络上仍能见到大量TEX产生的PostScript格式的书籍和文章，一些期刊也一直要求以能生成PostScript格式的TEX文档投稿。然而随着新一代廉价的喷墨打印机的出现，需要复杂解释芯片的PostScript打印机逐渐式微；而网络技术的发展进一步催生了电子文档交换的需求，PDF———Portable Document Format（可移植文档格式）便应运而生。PDF由Adobe公司于1993年发布，它是Adobe Acrobat系列产品的原生文件格式，并随着文件格式的公开和阅读器Adobe Reader免费的发放，迅速风靡起来。
+PDF与PostScript使用相同的Adobe图形模型，可以得到与PostScript相同的输出效果，而在程序语言方面则比PostScript大为削减，并增强文档格式结构化，可以更迅速地由计算机处理。尽管PDF最初只是PostScript削减功能适应电子文档处理的结果，但PDF转而在电子文档功能如交互式表单、多媒体嵌入等方面大下功夫，并不断进行各方面的扩充，最终成为一种比PostScript还复杂的格式（描述PDF1.7的手册[5]比描述PostScript 1.3的文档[4]要厚得多）。PDF也继PostScript之后成为现在新一代的电子出版业的事实标准。
+现代的TEX输出引擎几乎都以PDF为输出格式。同时PDF格式也可以像EPS格式一样作为图形格式被TEX和其他软件使用。现在能够输出PDF图形的软件和支持嵌入PDF图形的TEX引擎比EPS格式的还要多些，PDF也成为现在TEX系统中最重要的图形格式。
+1
+第1章	熟悉ETEX	21
+1.1.2.3 命令行工具
+一、命令行
+尽管大多数常用编译操作可以在编辑器中完成，CTEX和TEX Live也都给出了一些图形界面的配置工具，但TEX发行版的主体仍然是命令行下的程序。不了解命令行，就难以了解TEX的处理流程，也不能很好地使用诸如Makeindex这样的基本IATEX工具。因此，有必要对命令行和一些命令行工具的使用作一了解。
+命令行是以文字方式与计算机交互的方式，与图形方式相对。在Windows系统①中，命令行通常由命令解释程序cmd. exe处理；在Linux及其他类UNIX操作系统中，命令解释程序称为壳(Shell)，最常见的壳是Bash。在命令行下可以执行一些基本的文件操作，也可以运行其他程序，批处理脚本也是由命令行解释程序执行的。Linux中shell的使用一般远比在Windows中频繁，因此这里仍以Windows为例。
+Windows中默认的命令行解释程序cmd. exe可以从“开始”菜单的“附件”项中找到，叫做“命令提示符”②(见图1.10)；也可以直接运行（利用“开始”菜单的“运行”项或组合键Win+R）cmd. exe进入。如果使用频繁，可以在桌面或快速启动栏建立快捷方式，或设定快捷键随时使用。
+命令提示符
+C:\> cd test
+C:\test> dir
+驱动器C中的卷没有标签。
+卷的序列号是 B441-A714
+C:\test
+的目录
+2010/04/26
+13:51
+2010/04/26
+13:51
+2010/04/22
+14:09
+19,483 1. pdf
+2010/04/22
+14:09
+157 1. tex
+2 个文件
+19,640 字节
+2 个目录
+7,705,145,344 可用字节
+C:\test> 
+图1.10 Windows命令提示符（默认是黑底白字，这里为显示清晰改为白底黑字）
+使用TEX经常需要在特定文件所在的目录（文件夹）进行命令行操作，可以把进入命令行的操作添加到Windows资源管理器鼠标右键菜单中。这可以通过修改
+①指Windows NT及Windows 2000以后的版本，包括Windows XP、Windows Vista、Windows 7等。
+②从DOS系统开始使用计算机的人时常称Windows的命令解释程序为DOS窗口，这对于Windows 9x及更早的Windows是对的，但以后版本的Windows则不再包括DOS。新的命令行解释器只是在外观和命令上像是DOS.
+1
+22	1.1 让ETEX跑起来
+Windows注册表来完成。将下面的内容保存到一个后缀为. reg的文件中，双击导入注册表，或手工按其中的内容建立对应的注册表项，可以为当前用户添加“进入命令行”的右键菜单：
+Windows Registry Editor Version 5.00
+[HKEY CURRENT USER\Software\Classes\*\shell\进入命令行\command]@=" cmd"
+[HKEY CURRENT USER\Software\Classes\Folder\shell\进入命令行\command]@=" cmd /k cd \"%1\""
+打开命令行窗口后，会显示命令提示符。默认的命令提示符由当前盘符、目录（即文件夹）和一个大于号>组成，如
+C:\>
+表示当前目录是C盘的根目录>。后面的光标等待输入命令，Windows命令行命令和文件名不区分大小写，输入一行命令后按回车键即开始执行。
+使用最频繁的命令是列文件列表命令dir(directory的缩写)，直接输入dir后按回车键就会显示当前目录下所有文件的详细列表。dir命令后可以指定要列出的盘符、目录和文件名，如
+dir C:\WINDOWS
+将列出C盘WINDOWS 目录下的所有文件。
+目录和文件名可以使用？和*作为通配符。？可以代替任意一个字符，*可以代替任意多个字符。例如，命令
+dir book*. tex
+将列出所有以book开头，后缀为.tex的文件。目录和文件名可以用Tab键自动补全，如输入book后，连按Tab键将交替地补全当前目录所有以book开头的文件。有两个特殊的目录名。和。。，分别用来表示当前目录（可省略不写）和当前目录的上一层目录。
+cd命令(或chdir, change directory的缩写)用来改变当前所在的目录。如
+cd pictures
+将进入当前目录下的pictures目录（如果有的话），而从C盘用命令
+cd \WINDOWS\Fonts
+1
+第1章	熟悉ETEX	23
+则进入Windows的字体目录。注意更换盘符不能用cd命令，而要单独使用（盘符）后加符号：进入，如输入
+D:
+cd \test
+将进入D盘根目录下的test目录。
+把多个命令行写到一个文件里面，保存为后缀为 . bat或. cmd的文件，就得到一工	个批处理文件（又称批处理脚本）。在命令行下可以像运行其他程序一样调用批处理文件，也可以在图形界面鼠标点击批处理文件执行。批处理可以一次完成多项任务，如完成多道工序的TEX源文件编译工作。批处理还提供命令行参数、变量定义、条件判断等简单的编程功能，详细内容可参见微软的联机帮助。
+二、GhostScript
+GhostScript是一种PostScript的解释器，它的主体也是命令行工具。Windows版本的MiKTEX和TEX Live都附带安装了一个简化版本的GhostScript, CTEX套装则另行安装了一份完全的GhostScript.
+MiKTEX附带的GhostScript程序名为mgs, TEX Live中的程序则名为rungs.一般无论是Linux用户还是Windows用户，最好还是单独下载安装完全版本的GhostScript,因为一些ETEX输出引擎有时仍会调用它，Linux用户可以使用系统软件源中的版本，Windows用户可以在
+http://code.google.com/p/ghostscript/downloads/list
+下载安装包。
+可以用GhostScript查看PostScript或PDF格式的文件, PostScript文件查看器GSview和PS View都是调用GhostScript工作的.GhostScript更常用的功能则是进行文档格式转换，做PS、PDF格式的相互转换，或把它们转换为点阵图片格式，如PDF输出引擎DVIPDFMx就会在处理EPS图片时自动调用GhostScript.
+GhostScript为一些常用的转换提供简单的命令行，最常见的是从. ps到. pdf文件的转换，可以用ps2pdf命令完成，如：
+ps2pdf foo. ps
+命令会将foo. ps文件转换为foo. pdf文件。类似的命令还包括pdf2ps和eps2eps等。
+1
+24	1.1 让ETEX跑起来
+GSview程序为GhostScript的格式转换功能提供了一些图形界面的接口，在File菜单下的“PS to EPS”项目，就是用来把. ps文件转换为. eps文件的；而File菜单下的”Convert...”项目(见图1.11), 则可以完成GhostScript支持的各种转换。
+1. pdf-GSview
+File
+Edit
+Options
+View
+Orientation
+Media
+Help
+1
+文字
+1
+Convert
+✗
+关闭
+Device:
+Resolution:
+Pages:
+QK
+Prag256
+72
+pgmraw
+/4
+Cancel
+pgnm
+96
+pgnmraw
+120
+png16
+300
+Properties
+png16m
+600
+209256
+Help
+pnggray
+Fixed Page Size
+Al Pages
+Reverse
+Odd Pages
+Options:
+Even Pages
+File:1. pdf
+476.714pt Page:"1"1 of 1
+图1.11 使用GSview转换文件格式
+所有显示和转换的工作都可以通过GhostScript的主程序完成。GhostScript的主程>序是一个命令行程序，在Windows下名叫gswin32c. exe(64位的版本下名字为L gswin64c. exe),在Linux等系统下通常就叫做gs, 也可以使用TEX Live的rungs或MiKTEX的mgs，这里统一用GS表示。一个调用GS的命令通常带有许多命令行参数，以完成各种复杂的操作，例如，
+GS -dBATCH foo. eps
+将使GhostScript在屏幕上显示foo. eps的内容并退出；下面的命令（第一行末的\并不存在，只表示延续到下一行）：
+GS -q -sDEVICE=png256-dEPSCrop -r128-dGraphicsAlphaBits=4\
+-dTextAlphaBits=4-o bar. png foo. eps
+则把foo. eps转换为256色PNG图像bar. png, 使用128dpi的分辨率，剪裁到适当大小，并对文字和图像做边缘抗锯齿处理。关于GhostScript的详细命令行参数可以参考GhostScript的联机文档。
+1
+第1章	熟悉ETEX	25
+三、ImageMagick
+ImageMagick是一款优秀的基于命令行的位图处理软件，可以在超过100种不同的图像格式之间转换，或对图像进行各种变换和处理。熟悉平面设计的人可以把它看做是Adobe Photoshop这类软件的一些图像滤镜的命令行版本。ImageMagick并不直接与TEX相关，但TEX用户经常用它来做一些有关图形转换的工作，个别与TEX相关的软件(如Asymptote)也会调用ImageMagick.
+ImageMagick是自由软件，可以在
+http://www.imagemagick.org/
+下载安装。Windows用户一般下载标注为“Win32 dynamic at 16 bits-per-pixel”的版本安装，Linux等类UNIX操作系统可以下载二进制包或源代码编译，也可以直接使用系统软件源中的版本。
+在Windows下安装ImageMagick会在开始菜单项中找到它的帮助文档和ImageMagick中唯一的图形界面程序IMDisplay.但注意IMDisplay只是一个图片查看器，并不具备任何ImageMagick的图像处理功能，我们主要还是在命令行下使用ImageMagick.
+ImageMagick是个很复杂的软件，包括10多个不同的命令行工具，具有200多种不同的命令行参数。这里只介绍ImageMagick最基本的图像类型转换功能，也是最常用的功能，更详细的功能可以参见ImageMagick的联机帮助文件。
+命令convert用于图像的转换，即把一幅图像转换为另一幅图像，尽管功能复杂，但基本的使用方法是十分简明的，如：
+convert foo. bmp bar. png
+是将BMP格式的图像foo. bmp转换为PNG格式的图像bar. png, 类似地，
+convert foo. eps bar. pdf
+则是把EPS格式的图片foo. eps转换为JPG格式的图片bar. pdf。不过ImageMagick在处理涉及PostScript和PDF格式的图片时，内部实际还是调用GhostScript来完成的，这时可以把它看做是GhostScript命令的一种方便的变形。
+获取命令行帮助
+熟练的用户使用命令行完成一些工作比使用图形界面的软件更高效快捷。不过对于刚接触命令行不久的人来说，命令行的最大问题就是记不住命令的用法，因此应该了解如何在命令行下获取帮助信息。
+1
+26	1.1 让ETEX跑起来
+专门的联机文档或在线文档是比较通用的帮助形式，如在Windows下，由“开始”菜单进入联机帮助，以“命令行”、“cmd”等关键字搜索，很容易就能得到详尽的命令行帮助。有时帮助文档则以专门的文件存储，如GhostScript和ImageMagick在Windows下都提供网页形式的帮助文档，可以在“开始”菜单找到。也有许多程序提供CHM、PDF等格式的文档。
+另一种方式是直接在命令行下得到帮助，这通常是通过特殊的命令行参数得到的。通常，Windows命令行的基本命令可以在命令后加/？参数获得帮助。如输入
+dir /?
+将会在屏幕上得到dir命令的帮助信息：
+显示目录中的文件和子目录列表。
+DIR [drive:][path][filename] [/A[[:] attributes]] [/B] [/C] [/D] [/L] [/N]
+[/0[[:] sortorder]] [/P] [/Q] [/S] [/T[[:] timefield]] [/W] [/X] [/4]
+[drive:][path][filename]
+指定要列出的驱动器、目录和/或文件。
+来自类UNIX系统的程序命令行选项以-开头，命令行帮助通常可在命令后加--help得到。如输入
+convert - -help
+将会在屏幕上得到ImageMagick的所有命令行选项的说明（会非常长）。
+类UNIX系统在命令行下有一个man命令，可以用来调出文档。如用
+man ls
+将在命令行中直接调出ls命令(相当于Windows中的dir命令)的详细帮助，类似的文档程序还有info。在Windows中，用help命令可以达到类似的效果，不过效果和使用/？选项相同。TpX系统继承了UNIX中man的用法，也提供了一个textoc程序，可以在命令行下调出TEX宏包、工具和字体等的文档，参见8.3节。
+1
+第1章	熟悉ETEX	27
+1.1.3  "Happy TEXing"与“特可爱排版”
+在做完所有的准备工作以后，我们来一起运行一个简单的例子，测试整个系统。
+首先，打开你的TpX编辑器，如TeXworks，新建一个文件，输入下面的内容（不包括行号）：
+1	\documentclass{article}
+2
+、\begin{document}
+4	This is my first document.
+5
+6	Happy \TeX ing!
+7	\end{document}	1-1-1
+新建一个测试用的目录，将刚刚输入的文件保存到这个目录里面，选择PDFLaTeX或XeLaTeX的命令，点击编辑器上的对应的排版按钮（见图1.7）。如果一切顺利，将在PDF预览窗口看到编译的结果，内容类似下面的样子：
+This is my first document.
+Happy TEXing!
+如果你使用的不是TeXworks，而是WinEdt这类不带PDF预览功能的编辑器，点击排版按钮后可能会弹出一个PDF阅读器的窗口，显示出上面的页面，也可能你需要手工再点击打开PDF文件的按钮来查看排版的结果。
+这个文件中有一些以反斜杠\开头的语句，大多没有出现在最终的PDF文档中。虽然我们以前并没有接触过这些语句，不过不难猜测其涵义：\documentclass{article}声明了文档的类型是一篇文章; \begin{document}和\end{document}语句标识出正文的范围；至于正文中的\TeX，看结果就知道它表示“TEX”这个高低不平的符号。这就是我们的第一个例子，看起来很简单。
+可是，如果你马上兴致勃勃地把里面的内容换成汉字，再点击按钮看结果时，就会发现汉字并没有出现在PDF文档中，只有英文字符出现。这是因为TEX原本是面向西文写作的，默认并没有加载中文字体。
+通过更换文档类型，下面这个稍稍复杂的例子可以正确显示出中文（这正是图1.7和图1.12中的例子）：
+1	\documentclass[UTF8]{ctexart}
+2	\begin{document}
+1
+28	1.1让ETEX跑起来
+各种编译命令和阅读器的按钮
+WinEdt7.0 (Unregistered Copy) - [C:\test\1. tex]
+File
+Edit
+Search
+Insert
+Document
+Project
+View
+Iools
+Macros
+Accessories
+TeX
+Qptions
+Window
+Help
+  1
+B
+F
+M
+1. tex
+Tree-1. tex
+1
+% !TeX encoding = UTF-8
+2 \documentclass[UTF8]{ctexart}
+1. tex
+3
+TOC
+4
+\begin{document}
+文字
+公式
+5
+labels(1)
+6|
+\section（文字）\label{sec: text}
+sec: text
+7|
+特可爱排版
+8
+.
+\section{公式}
+10
+NI
+11
+a^2 + b^2 = c^2
+12
+\]
+13
+14\end{document}
+1
+6
+11:18
+13
+Wrap
+Indent
+INS
+LINE
+Spell
+Tex
+-arc
+WinEdt. prj
+图1.12 CTEX 套装2.9中的 WinEdt 7编辑器。WinEdt 的界面比TeXworks要复杂得多，	有各种命令的编译按钮和许多额外的工具
+3	\section{文字}
+4	特可爱排版。
+5	\section{数学}
+6	\[
+7	a^2+ b^2= c^2
+8	\]
+1-1-2	9	\end{document}
+注意文档保存时要使用UTF-8编码，这是TeXworks的默认值，但WinEdt可能需要在保存时选择①，编译后的结果如图1.13所示。
+这段代码也不难看懂②：文档类换成了ctexart,即中文TEX的文章(article)类型，这个文档类使得中文可以正确地显示③；在ctexart前面的[UTF8]是使用这个文档类的选项，表明了中文所使用的编码；两个\section命令各自生成了一节的标题；
+①不同版本的WinEdt设置不同，WinEdt7开始以UTF-8为默认编码，但CIPX套装可能仍然配置为本地的GBK编码。不同版本在使用时需要仔细查看。
+②唔……也许使你最费解的是“特可爱”。这其实是TEX的谐音，也有双关的意味。
+③ctexart文档类默认使用中文版Windows所预装的字体。对于Linux等其他系统的命令，可能需要不同的设定才能正确显示汉字，参见2.4.1节。
+1
+第1章	熟悉ETEX	29
+1 文字
+特可爱排版。
+2 数学
+a^{2} + b^{2} = c^{2}
+图1.13 最简单的IATEX文档
+唯一不大直观的是由\[和\]包裹起来的数学公式，不过ETEX数学公式的能力太出名了，你一定早听说过它了。
+上面两个简单的例子给了我们一个IATEX的直观印象，而且正确运行它们或许能增强你学习ETEX的信心。粗略地看，ETEX是一种标记式排版语言①，有相关背景的人大概会觉得IATEX的代码与HTML代码有很多相似之处，整个文档通过一些标记（命令）分成结构化的部分。ETEX的命令以反斜线\开头，命令一般用英文单词命名，有的可以带参数。通过一个程序的处理，我们称为编译过程，IATEX源代码就能生成对应的输出结果，通常就是一个PDF文档。
+编写
+输入
+输出
+发布
+TEX源文档
+编译程序
+PDF文档
+修改
+图1.14 LTEX 文档的写作流程
+IATEX文档的写作流程见图1.14.通常这个过程都是自动化完成的，编写TEX源文档通常是在专门的TEX编辑器中进行，例如TeXworks和WinEdt，而后按下一个按钮，源文件就被送给TEX的编译程序进行处理，输出PDF文件，此时编辑器调用PDF阅读器查看结果。如果出了问题，需要根据输出的结果或程序的错误信息修改源文件或编译方式。
+练习
+①严格来说，TEX/ISTEX并不是HTML、XML那样的标记语言，而是主要基于字符串代换的宏语言。不过TEX，尤其是ISTEX的格式与标记语言的用法很像，在很多情况下也可以把它看做标记语言。
+1
+30	1.1 让ETEX跑起来
+1.1不使用专用编辑器，只用普通的文本编辑器录入上面的例子，然后在命令行下编译TEX文档，查看运行的结果。
+编译程序
+TeXworks、WinEdt等编辑器里面给出了许多编译程序的按钮，往往让人有目不暇接的感觉，如果你留心来自各种书籍、文档和网络的资料，上面介绍的编译方法五花八门。如果是使用命令行编译，则输入起来更觉头疼，那么，这些不同的编译程序做了什么？该如何选择和使用呢？
+高德纳设计的TpX原本只是一个相对简单的程序，命令tex就会调用最基本的TpX程序①。它使用高德纳在[126]中描述的一个相对简单的格式Plain TEX进行排版。tex读入TEX源文档，输出一种称为“设备无关”的(DeVice Independent)格式，即DVI文件, DVI文件在过去是TEX的标准输出格式，但功能比较受限，不能嵌入字体和图形等，在PostScript和PDF流行之后，DVI格式就主要成为一种到PS或PDF格式的中间格式了。
+程序Dvips将DVI文件转换为PostScript文件，可以直接拿到支持PostScript的打印机上打印，也可以通过GhostScript的ps2pdf或Adobe Acrobat提供的Distiller等程序再从PostScript文件转换为PDF文件.PDF流行以后又有了能把DVI文件直接转换为PDF文件的dvipdf程序，之后出现了更为先进的dvipdfm和dvipdfmx,可以支持更丰富的PDF功能和东亚字体等，现在新的发行版中主要还在使用的是dvipdfmx(常写做DVIPDFMx)。这类把DVI文件转换为其他实用格式的程序常被称为TEX输出的驱动(driver).
+除了最初的TEX程序，后来有许多人对TpX进行了扩展。先是有了ε-TEX,后来在ε-TEX的基础上, Hàn Thê Thành设计了能直接输出PDF格式的pdfTEX.不过pdfTEX程序也保留了输出DVI格式的能力，因而现在很多输出DVI格式的命令内部也是使用的pdfTEX程序。pdfTEX的后继是LuaTEX, 这是一种把脚本语言Lua和TEX结合起来的程序。ε-TEX的另一发展则是XqTEX（纯文本写成XeTeX）程序，它将中间层DVI格式扩充为更强大的xdv格式，一般会直接调用dvipdfmx的后继xdvipdfmx, 直接输出PDF格式。LuaTEX和XqTEX都将原来TpX支持的ACSII编码改为UTF-8编码，并且可以更方便地使用各种字体。TEX程序连同这些扩展常被称为不同的TEX引擎(engine).
+有关TpX的各种软件及其关系的更详细的说明，可参见Trautmann[266].
+①有的发行版是使用Plain TEX格式并输出DVI文件的pdfTEX程序。
+1
+第1章	熟悉ETEX	31
+不同的引擎都可以编译Plain TEX、IETEX或是ConTEXt①等不同格式的文档，不同的组合就使用不同的命令，见表1.1，我们主要关注pdfTpX和XqTpX引擎使用ETEX格式的命令。
+表1.1 各类引擎和格式使用的TEX命令
+输出DVI
+命令	格式引擎	Plain TEX	IATEX	ConTEXt
+TEX/ε-TEX	tex/ etex
+pdfTEX	tex	latex
+pdftex	pdflatex	texexec
+XgTEX	xetex	xelatex	特殊参数
+LuaTEX	luatex	lualatex	context
+输出PDF
+使用ETEX格式的排版得到PDF文件的方式也有好几种(见图1.15)。其中使用latex+dvips的方式最为古老，不便于中文文档的排版，现在一些西文期刊仍然要求这样排版。其他几种方式都能较好地进行中文排版。用latex和pdflatex命令排版在处理中文时都使用CJK宏包的机制，而xelatex则使用新的xeCJK宏包的机制.功能上xelatex最为方便，尤其是在处理中文时；而用pdflatex编译，一些宏包的兼容性更好一些。不过本书的大部分内容并不限于图1.15中的任何一种模式，只是在处理中文时，将主要讨论xelatex.
+pdflatex
+编写
+输入
+输出
+发布
+TEX源文档
+xelatex
+PDF文档
+latex
+DVI文件
+dvipdfmx
+dvips
+PS文件
+ps2pdf
+图1.15 使用各种引擎编译ETEX文档的简要流程。在处理中文时，我们以xelatex为主__
+①不同于IMTEX, ConTEXt是一种把TEX和脚本语言紧密结合的格式, LuaTEX程序就主要用于ConTigXt格式。
+1
+\end{verbatim}
+
+\subsection{从一个例子说起}
+\label{sub:从一个例子说起}
+
+这一节将研究一个相对实际的例子。
+在这个简化的例子中，我们将看到在真正的写作排版工作中时常遇到的一些模式、问题的解决思路。
+有一些代码或许一时难以理解，不要担心，我们将在后续的章节里面详细讨论。
+
+\subsubsection{确定目标}
+\label{subsub:确定目标}
+
+现在来把话题限定在初等平面几何，假定我们要写一篇关于勾股定理的短文，短文是一般的科技论文的模式，结构上包括标题、摘要、目录、几节的正文和最后的参考文献；内容包括文字、公式、图形、表格等。
+短文的格式很平凡，没有什么特别的地方，但也足够实际，可以代表大多数使用IATEX的人日常接触最多的文档类型，只不过现实中的例子在内容上比这里的例子更丰富、更深刻。
+为了能在书中方便地显示这个例子，我们把短文的页面设置得很小，四页拼成一页，完成后的样子见图1.16.如果你以前已经对IATEX有一些基础，不妨自己动手试排一下这个小例子（不偷看本章后面的说明），看看你能否准确高效地完成这个例子；即使你对IATEX的实际了解还仅限于1.1.3节中的简单介绍，也不妨考虑一下，在这个极其简单的例子中，有哪些内容需要表现，它们对应的形式是什么，需要注意哪些问题。
+
+\subsubsection{从提纲开始}
+\label{subsub:从提纲开始}
+
+无论是对已经写好的文章进行排版，还是从零开始直接写文章，从提纲开始都是一个好主意。写出LTEX文档的框架，进行必要的基本设置，然后再填入内容就方便了。
+我们的例子《杂谈勾股定理》的提纲如下：
+
+\begin{verbatim}
+1%-* - coding: UTF-8- *-
+2% gougu. tex
+3%勾股定理
+4	\documentclass[UTF8]{ctexart}
+5
+6	\title{杂谈勾股定理}
+7	\author{张三}
+8	\date{\today}
+9
+10	\bibliographystyle{plain}
+1
+12	\begin{document}
+13
+14	\maketitle
+15	\tableofcontents
+16	\section{勾股定理在古代}
+17	\section{勾股定理的近代形式}
+18	\bibliography{math}
+19
+20	\end{document}
+\end{verbatim}
+
+
+\begin{verbatim}
+源文件中的一些东西我们已经见过了，也有一些是没见过的。但可以看出整个文章的框架，现逐条进行说明：
+前面以百分号%开头的行是注释。在TEX中，源文件一行中百分号后面的内容都会被忽略。
+这里有三行注释，第 1 行表明了这个文件的编码是 \verb|UTF-8|，这对中文文档往往非常有用；
+第 2 行是源文件的文件名 \verb|gougu.tex|；
+第 3 行则说明了源文件的内容。
+注释并不是TEX源文件必需的，这里对文件内容的注释似乎与文档标题重复，不过对于比较大的文档，源文件往往分成多个文件，这类说明性的文字就十分重要了。
+第 4 行是文档类，因为是中文的短文，所以使用 \verb|ctexart|，并用 \verb|[UTF8]| 选项说明编码。（参见2.4.1节）
+第 6 行至第 8 行，声明了整个文章的标题、作者和写作日期，其中 \verb|\today| 当然是“今天”的日期。这些信息并不马上出现在编译的结果中，而要通过第 14 行的 \verb|\maketitle| 排版。（参见2.3.1节）
+第 10 行的 \verb|\bibliographystyle| 声明参考文献的格式。（参见3.3.1节）
+以上在\begin{document}之前的部分称为导言区(preamble), 导言区通常用来对文档的性质做一些设置，或自定义一些命令。
+·第12行和第20行以\begin{document}和\end{document}声明了一个document环境，里面是论文的正文部分，也就是直接输出的部分。
+·第14行的\maketitle命令实际输出论文标题。（参见2.3.1节）
+·第15行的\tableofcontents命令输出目录。（参见3.1.1节）
+①这里用的其实是一种特定格式的特殊注释，源自Emacs编辑器，WinEdt与一些UNIX下的编辑器可以根据这种注释自动判断文件的编码，不过这里使用这种格式主要为了好看。TeXworks也有这种功能的注释，只是格式不同。
+1
+第1章	熟悉ETEX	35
+·第16至17行两个\section开始新的一节。（参见2.3.2节）
+·最后第18行的\bibliographystyle{math}则是提示TEX从文献数据库math中获取文献信息，打印参考文献列表。（参见3.3.1节）
+\end{verbatim}
+
+
+为了格式上的清晰，源文件中适当使用了一些空行作为分隔。在正文外的部分，空行不表示任何意义。
+这里的提纲非常简单，整个文档也没有什么复杂的层次结构。编译提纲将得到只有一些标题的文件。我们并没有写任何编号或数字，所有编号，包括目录和页码都是自动生成的。注意这里要生成目录至少需要编译两次，让ISTEX有机会读完整个论文来计算目录结构。
+
+\subsubsection{填写正文}
+\label{subsub:填写正文}
+
+西方称勾股定理为毕达哥拉斯定理，将勾股定理的发现归功于公元前□世纪的毕达哥拉斯学派。该学派得到了一个法则，可以求出可排成直角三角形三边的三元数组。毕达哥拉斯学派没有书面著作，该定理的严格表述和证明则见于欧几里德《几何原本》的命题 47：“直角三角形斜边上的正方形等于两直角边上的两个正方形之和。”证明是用面积做的。
+7	我国《周髀算经》载商高（约公元前□12□世纪）答周公问……
+
+填写正文的部分看起来比较容易，就是直接填写大段的文字，不过仔细查看代码，也有如下一些要注意的地方（这里用。表示空格）。
+使用空行分段。
+单个换行并不会使文字另起一段，而只是起到使源代码更易读的作用（上面的代码每行35个汉字）。
+空白行，也就是至多有空格的行，会使文字另起一段。空行只起分段作用，使用很多空行并不起任何增大段间距的作用。
+段前不用打空格，\LaTeX 会自动完成文字的缩进。
+即使手工在前面打了空格，\LaTeX 也会将其忽略，事实上它会忽略每行开始的所有空格。
+也不要使用全角的汉字空格，这通常会使排版的效果变得糟糕。
+通常汉字后面的空格会被忽略，其他符号后面的空格则保留，因而用左右就得到连续的“左右”，但left→right则输出有空格的“left right”。单个的换行就相当于一个空格，因此源代码中大段文字可以安全地分成短行。空格只起分隔单词或符号的作用，使用很多空格并不起任何增大字词间距的作用。
+
+使用 \verb|xelatex| 编译文档时，\verb|ctexart| 文档类会调用 \verb|xeCJK| 宏包，自动处理汉字与其他符号之间的距离，无论你有没有在它们之间加上正确的空格，这是十分方便的。
+不过，在源代码中仍然可以给汉字与其他符号之间加上一个空格，这会令代码更加清晰。
+换行与空格的使用，正是在E'TEX中文字排版最基本的部分，却也是最容易被忽略的。现在你的心思可能早已经飘到脚注和《周髀算经》的引用这些显眼的地方了，但在进行下一步之前最好还是巩固一下前面的内容。
+练	习
+1.2从你最喜欢的小说中找几段文字，使用ETEX排版。如果有某些特殊符号（比如注释符号%）造成了问题，可以暂时将其去掉。
+
+\subsubsection{命令与环境}
+\label{subsub:命令与环境}
+
+继续排版短文的第 1 节，我们来处理脚注和引用内容。
+脚注是在正文“欧几里德”的后面用脚注命令 \verb|\footnote| 得到的（参见2.2.7节）：
+\begin{verbatim}
+……见于欧几里德\footnote{欧几里德，约公元前 330--275 年。}《几何
+原本》的……
+\end{verbatim}
+在这里，\verb|\footnote| 后面花括号内的部分是命令的参数，也就是脚注的内容。
+
+文中还使用 \verb|\emph| 命令改变字体形状，表示强调(emphasis)的内容：
+\begin{verbatim}
+……的整数称为\emph{勾股数}。
+\end{verbatim}
+
+\begin{verbatim}
+一个IATEX命令（宏）的格式为：
+无参数：	\command
+有n个参数:  \command(arg₁)(arg₂)……(argn)
+有可选参数:  \command[(argopt)](arg₁)(arg₂)…(argn)
+命令都以反斜线\开头，后接命令名，命令名或者是一串字母，或是单个符号。命令可以带一些参数，如果命令的参数不止一个字符（不包括空格），就必须用花括号括起来。可选参数如果出现，则用方括号括起来。这里的脚注命令\footnote就是带有一个参数的命令，前面见到的\documentclass命令就是一个能带可选参数的命令。
+\end{verbatim}
+
+引用的内容则是在正文中使用 \verb|quote| 环境得到的：
+\begin{verbatim}
+……答周公问：
+\begin{quote}
+1
+第1章	熟悉ETEX	37
+勾广三，股修四，径隅五。
+\end{quote}
+又载陈子（约公元前 7--6世纪）答荣方问：
+\begin{quote}
+若求邪至日者，以日下为勾，日高为股，勾股各自乘，并而开方除之，得邪至日。\end{quote}
+都较古希腊更早。……
+quote环境即以\begin{quote}和\end{quote}为起止位置的部分。它将环境中的内容单独分行，增加缩进和上下间距排印，以突出引用的部分（参见2.2.2节）。
+\end{verbatim}
+
+不过，如果只使用 \verb|quote| 环境，并不能达到预想的效果：\verb|quote| 环境并不改变引用内容的字体。
+因此还需要再使用改变字体的命令，即：
+\begin{verbatim}
+\begin{quote}
+\zihao{-5}\kaishu 引用的内容。
+\end{quote}
+\end{verbatim}
+
+
+这里，\verb|\zihao| 是有一个参数的命令，选择字号（-5就是小五号）；而 \verb|\kaishu| 则是没有参数的命令，把字体切换为楷书，注意用空格把命令和后面的文字分开(参见2.1.3节和2.1.4节)。
+
+类似地，文章的摘要也是在 \verb|\maketitle| 之后用 \verb|abstract| 环境生成的：
+\begin{verbatim}
+\begin{abstract}
+这是一篇关于勾股定理的小短文。
+\end{abstract}
+摘要环境预设的格式已经满足我们的要求，不必再修改了。
+上面使用的选择字体字号的命令与之前的脚注命令不同。\footnote（内容）只在原地发生效果，即生成脚注；但\zhao（字号）与\kaishu命令则会影响后面的所有文字，直到整个分组结束，这种命令又称为声明(declaration).
+分组限定了声明的作用范围。一个IATEX环境自然就是一个分组(group)，因此前面的字号、字体命令会影响整个quote环境。最大的分组是表示正文的document环境，也可以用成对的花括号{}产生一个分组。
+IATEX环境(environment) 的一般格式是：
+\begin{（环境名）}
+1
+38	1.2 从一个例子说起
+（环境内容）
+\end{（环境名）}
+有的环境也有参数或可选参数，格式为：
+\begin{（环境名）}[〈可选参数〉]〈其他参数〉
+（环境内容）
+\end{（环境名）}
+
+quote环境是无参数的，后面我们很快会在制作表格时遇到有参数的环境。
+文章第二节的定理，是用一类定理环境输出的（参见2.2.4节）。定理环境是一类环境，在使用前需要先在导言区做定义：
+\newtheorem{thm}{定理}
+这就定义了一个thm的环境。定理环境可以有一个可选参数，就是定理的名字，于是前面的勾股定理就可以由新定义的thm环境得到：
+\begin{thm}[勾股定理]
+直角三角形斜边的平方等于两腰的平方和。
+可以用符号语言表述为……
+\end{thm}
+\end{verbatim}
+
+
+最后来注意一个小细节，前面在表示起迄年份时，用了两个减号 \verb|--|，这在 \LaTeX 中将输出一个“en dash”，即宽度与字母“n”相当的短线，通常用来表示数字的范围[12、35]。
+
+\subsubsection{遭遇数学公式}
+\label{subsub:遭遇数学公式}
+
+\begin{verbatim}
+现在来看我们最关心的问题————输入数学公式，这大概是多数使用 \LaTeX 的人花费精力最多的地方了。
+最简单的输入公式的办法是把公式用一对美元符号 \verb|$$| 括起来，如使用$a+b$就得到漂亮的a+b，而不是直接输入a+b得到的干巴巴的a+b。
+这种夹在行文中的公式称为“正文公式”(in-text formula)或“行内公式”(inline formula)。
+对比较长或比较重要的公式，一般则单独居中写在一行；为了方便引用，经常还给公式编号。
+这种公式被称作“显示公式”或“列表公式”(displayed formula)，使用 \verb|equation| 环境就可以方便地输入这种公式：
+
+\begin{equation}
+a(b+c) = ab + ac	1-2-1
+\end{equation}	a(b+c)= ab+ ac (1.1)	1
+键盘上没有的符号，就需要使用一个命令来输入。例如表示“角”的符号∠，就可以用\angle输入。命令的名字通常也就是符号的名字，“角”的符号是\angle，希腊字母π也就用其拉丁拼写\pi①.用命令表示的数学符号在IATEX中使用起来与用键盘输入的数学符号用起来并没有什么区别：
+$\angle ACB = \pi /2$	∠ACB =π/2	1-2-2
+数学公式不止是符号的堆砌，还具有一定的数学结构，如上下标、分式、根式等。在勾股定理的表述中，就用到了上标结构表示乘方：
+\begin{equation}
+AB^2= BC^2+ AC^2.	1-2-3
+\end{equation}	AB²=BC²+AC². (1.2)
+符号^用来引入一个上标，而 则引入一个下标，它们用起来差不多等同于一个带一个参数的命令，因此多个字符的上下标需要用花括号分组，如$2^{10}=1024$得到210=1024.
+怎么输入90°?如果去查4.3节的数学符号表，你可能一无所获，由于IATEX默认的数学字体中，并没有一个专用于表示角度的符号，自然也没有这个命令。角度的符号°是通过上标输入的：$^\circ$。这里\circ其实是一个通常用来表示函数复合的二元运算符“o”，我们把它的上标借用来表示角度，90°可以使用$90^\circ$输入。
+这篇小短文用到的数学公式暂且就只有这么多，我们将在第4章再来深入讨论这个话题。
+\end{verbatim}
+
+\subsubsection{使用图表}
+\label{subsub:使用图表}
+
+准备图表比起输入文字和公式就要麻烦一些了，很多人能驾驭十分复杂的数学公式，却往往在图表问题上一筹莫展。
+这篇关于勾股定理的短文使用的图表形式都比较简单，但也是典型的。
+①ISO标准对科技文档要求常数π使用直立体，不能用斜体，这个例子不考虑这些。相关问题见4.3.1节。
+
+
+首先来看插图。
+在 \LaTeX 中使用插图有两种途径，一是插入事先准备好的图片，二是使用 \LaTeX 代码直接在文档中画图。
+大部分情况下都是使用插入外部图片的方式，只在一些特别的情况大量用代码作图（如数学的交换图）。
+插图功能不是由 \LaTeX 的内核直接提供，而是由 \verb|graphicx| 宏包提供的。
+要使用 \verb|graphicx| 宏包的插图功能，需要在源文件的导言区使用 \verb|\usepackage| 命令引入宏包：
+\begin{verbatim}
+\documentclass{ctexart}
+\usepackage{graphicx}
+%……导言区其他内容
+\end{verbatim}
+引入 \verb|graphicx| 宏包后，就可以使用 \verb|\includegraphics| 命令插图了：
+\begin{verbatim}
+\includegraphics[width=3cm]{xiantu. pdf}
+\end{verbatim}
+
+\begin{verbatim}
+这里\includegraphics有两个参数，方括号中的可选参数width=3cm设置图形在文档中显示的宽度为3cm，而第二个参数xiantu. pdf则是图形的文件名（放在源文件所在目录）。有最常见的情况，图形使用其他画图工具做好，但在制作的时候尺寸不符合文章的要求，需要在插图时设置参数缩放到指定的大小。还有一些类似的参数，如scale=（放缩因子）、height=（高度）等，我们在这篇小短文中实际使用的是scale=0.6.插图命令支持的图形文件格式与所使用的编译程序有关，这篇中文文章使用xelatex命令编译，支持的图形格式包括PDF、PNG、JPG、EPS等，这里的图形实际是利用Asymptote语言制作的（参见5.5.3节）。
+
+插入的图形就是一个有内容的矩形盒子，在正文中和一个很大的字符没有多少区别。
+因此如果把插图和文件混在一起，就会出现这样的情况。
+1
+\includegraphics[width=3cm]{xiantu. pdf}text text
+号
+文字文字
+text text
+除了一些很小的标志图形，我们很少把插图直接夹在文字之中，而是使用单独的环境列出。
+而且很大的图形如果固定位置，会给分页造成困难。
+因此，通常都把图形放在一个可以变动相对位置的环境中，称为浮动体(float)。
+在浮动体中还可以给图形加入说明性的标题，因此，在《杂谈勾股定理》中实际是使用下面的代码插图的：
+
+1	\begin{figure}[ht]
+2	\centering
+3	\includegraphics[scale=0.6]{xiantu. pdf}
+4
+\caption{宋赵爽在《周髀算经》注中作的弦图（仿制），该图给出了勾股定理的一个极具对称美的证明。}
+5
+6	\label{fig: xiantu}
+7	\end{figure}
+
+在上面的代码中，第 1 行和第 7 行使用了 \verb|figure| 环境，就是插图使用的浮动体环境。
+\verb|figure| 环境有可选参数 \verb|[ht]|，表示浮动体可以出现在环境周围的文本所在处(here)和一页的顶部(top)。
+\verb|figure| 环境内部相当于普通的段落（默认没有缩进）；
+第 2 行用声明 \verb|\centering| 表示后面的内容居中；
+第 3 行插入图形；
+第 4 行和第 5 行使用 \verb|\caption| 命令给插图加上自动编号和标题；
+第 6 行的 \verb|\label| 命令则给图形定义一个标签，使用这个标签就可以在文章的其他地方引用 \verb|\caption| 产生的编号（编号引用我们会在后面讲到）。
+这段插图的代码非常格式化，在绝大多数情况下，文章中的插图都是用与这里几乎完全相同的代码插入的。
+
+下面再来看表格。
+插图可以用其他软件做好插入，但表格一般都还是直接在 \LaTeX 里面完成的。
+制作表格，需要确定的是表格的行、列对齐模式和表格线，这是由 \verb|tabular| 环境完成的：
+\begin{tabular}{|rrr|}
+\hline
+直角边 $a$ &直角边 $b$ &斜边 $c$ \\
+\hline
+3&4&5\\
+5&12&13\\
+\hline
+\end{tabular}
+直角边a 直角边b 斜边c
+3	4	5
+5	12	13
+\verb|tabular| 环境有一个参数，里面声明了表格中列的模式。
+在前面的表格中，\verb!|rrr|! 表示表格有三列，都是右对齐，在第一列前面和第三列后面各有一条垂直的表格线。在tabular环境内部，行与行之间用命令\\隔开，每行内部的表项则用符号&隔开。表格中的横线则是用命令\hline产生的。
+表格与\includegraphics命令得到的插图一样，都是一个比较大的盒子。一般也放在浮动环境中，即table环境，参数与大体的使用格式也与figure环境差不多，只是\caption命令得到的标题是“表”而不是“图”。在《杂谈勾股定理》中，我们稍稍改变了一下figure环境通常的内容：
+1	\begin{table}[H]
+2	\begin{tabular}{| rrr|}
+3	\hline
+4	直角边 $a$ &直角边 $b$ &斜边 $c$\\
+5	\hline
+6	3&4&5\\
+7	5&12&13\\
+8	\hline
+9	\end{tabular}%
+10	\qquad
+11	($a^2+ b^2= c^2$)
+1-2-5	12	\end{table}
+直角边a 直角边b 斜边c
+3	4	5
+5	12	13
+(a^{2} + b^{2} = c^{2})
+1
+第1章	熟悉ETEX	43
+这里并没有给表格加标题，也没有把内容居中，而是把表格和一个公式并排排开，中间使用一个\qquad分隔。命令\qquad产生长为2em（大约两个“M”的宽度）的空白。因为我们已经使用\qquad生成足够长度的空格了，所以再用\end{tabular}后的注释符取消换行产生的一个多余的空格，这正好达到我们预想的效果。
+之所以使用这种方式放置表格，是因为在正文中表格前面写道：
+……下表列出一些较小的勾股数：
+也就是说表格和正文是直接连在一起的，而且后面的公式也说明了表格的意义，自然就不再需要多余的标题了，这么一来表格就与正文连在一起，不允许再浮动了，因而这里本来是不应该使用浮动的table环境的，但我们仍然用了table环境，在表示位置的参数处使用了 [H]，表示“就放在这里，不浮动”。[H]选项并不是标准ATEX的table环境使用的参数，而是由float宏包提供的特殊功能。因此要让上面的代码正确运行，还要在导言区使用\usepackage{float}。在这种表格很小（不影响分页），行文又要求连贯的场合，float宏包的这种不浮动的图表环境是很有用的。
+1.2.7  自动化工具
+到目前为止，《杂谈勾股定理》这篇小文的大部分内容已经排完了，如果把前面提到的所有代码结合起来，装进一个文件中，差不多就能得到一篇完整的文章———这里说“差不多”，其实还缺少一些重要的东西，最明显的就是参考文献列表。
+你一定已经注意到了，在前面文档的提纲中，我们已经用\bibliographystyle命令声明了参考文献的格式，又用\bibliography命令要求打印出参考文献列表。不过，这只是使用BIBTEX处理文献的一个空架子，我们尚没有定义“参考文献数据库”，自然也不会产生任何文献列表。
+BIBTEX使用的参考文献数据库其实就是一个后缀为 . bib的文件。我们的《杂谈勾股定理》使用了一个包含3条文献的数据库文件math. bib，内容如下：
+% This file was created with JabRef 2.6.
+% Encoding: UTF8
+@BOOK{Kline,
+title = {古今数学思想}，
+publisher = {上海科学技术出版社}，
+\end{verbatim}
 %\bibliography{}
 \end{document}

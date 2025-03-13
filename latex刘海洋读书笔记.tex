@@ -1,0 +1,521 @@
+%-*- coding: UTF-8 -*-
+% 文件名：LaTeX使用手则.tex
+% 描述：
+% 指导我怎么规范使用 LaTeX
+\documentclass[UTF8]{ctexart} % 使用中文文档类
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               package                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%
+%  作者  %
+%%%%%%%%%%
+\usepackage{authblk} % 多作者
+\renewcommand\Authfont{\normalsize}      % 作者名字保持正常字号
+\renewcommand\Affilfont{\scriptsize}     % 机构名称使用较小字号
+
+%%%%%%%%%%%%
+%  超链接  %
+%%%%%%%%%%%%
+\usepackage{hyperref} % 网页超链接
+
+%%%%%%%%%%%%%%%%%%
+%  实现对勾和叉  %
+%%%%%%%%%%%%%%%%%%
+\usepackage{pifont} % 对勾和叉
+\newcommand{\cmark}{\ding{51}} % 对勾
+\newcommand{\xmark}{\ding{55}} % 错误标记
+
+
+
+\usepackage{graphicx} % 插入图片
+\usepackage{xcolor} % 启用颜色支持
+\usepackage{float} % 使得表格不浮动
+
+%%%%%%%%%%%%%%
+%  verbatim  %
+%%%%%%%%%%%%%%
+
+\usepackage{fancyvrb} % 2.2.1节为了将代码放进盒子里，功能强大
+\usepackage{cprotect} % 2.2.1节为了将代码放进盒子里
+\usepackage{shortvrb} % 2.2.1节为了简写verb命令
+%\MakeShortVerb|
+%\DeleteShortVerb|
+\usepackage{listings} % 代码高亮
+
+%%%%%%%%%%
+%  数学  %
+%%%%%%%%%%
+\newtheorem{thm}{定理}
+
+
+%%%%%%%%%%%%%%
+%  参考文献  %
+%%%%%%%%%%%%%%
+\bibliographystyle{plain}
+
+%%%%%%%%%
+%  mkt  %
+%%%%%%%%%
+\title{\LaTeX 编辑手册}
+\author[1,2]{Lan \footnote{Email: lanalters@mail.ustc.edu.cn, Student ID: SA24168214}}
+\affil[1]{中国科学技术大学, 合肥 230026}
+\affil[2]{中国科学院合肥物质科学研究院\,等离子体物理研究所, 合肥 230031}
+\date{\today}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                               content                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+首要问题是我的 \LaTeX 文档里需要包含什么？
+采用什么样的格式？
+什么样的规范？
+\LaTeX 的原则是内容和格式分离，因此它是极好进行预处理的格式。
+
+\section{熟悉 LaTeX}
+\label{sec:熟悉LaTeX}
+
+\paragraph{\LaTeX 相对于 \TeX 的先进之处}
+
+\LaTeX 则为了减轻写作、排版一肩挑的负担，把大片排版的格式细节隐藏在若干样式之后，以内容的逻辑结构统帅纷繁的格式，遂成为现在最流行的科技写作———尤其是数学写作的工具之一。
+\footnote{因此要怎么排版，取决于内容的逻辑}
+
+\subsection{让 \LaTeX 跑起来}
+\label{sub:让LaTeX跑起来}
+
+学习 \LaTeX 的第一步就是上手试一试，让 \LaTeX 跑起来。
+
+\subsubsection{\LaTeX 发行版及其安装}
+\label{subsub:LaTeX发行版及其安装}
+
+程序安装好后，会在桌面上增加 \TeX 编辑器 \verb|TeXworks| 和 \verb|PostScript| 文件查看工具 \verb|PS_View| 的图标，现在就可以进行工作了。
+但是似乎我安装的 \TeX Live 并没有安装 \verb|PS_View|。
+
+\paragraph{TeX Live Manager}
+\label{par:TeX Live Manager}
+
+这是 \TeX Live 管理工具的图形界面（见图1.6），简称 \verb|tlmgr|。
+管理工具也可以在命令行下用 \verb|tlmgr| 命令运行，用 \verb|tlmgr gui| 可以在命令行下打开图形界面。
+
+\subsection{从一个例子说起}
+\label{sub:从一个例子说起}
+
+\subsubsection{确定目标}
+\label{subsub:确定目标}
+
+现在来把话题限定在初等平面几何，假定我们要写一篇关于勾股定理的短文，短文是一般的科技论文的模式，结构上包括标题、摘要、目录、几节的正文和最后的参考文献；内容包括文字、公式、图形、表格等。
+分别来关注，这些部分如何实现。
+此外，我还关心怎么把短文的页面设置得很小，四页拼成一页。
+
+首先它有一些好习惯，比如前三行注释，第 1 行表明了这个文件的编码是 \verb|UTF-8|，这对中文文档往往非常有用；
+第 2 行是源文件的文件名 \verb|gougu.tex|；
+第 3 行则说明了源文件的内容：
+\begin{verbatim}
+%-* - coding: UTF-8- *-
+% gougu. tex
+% 勾股定理
+\end{verbatim}
+第 4 行是文档类，因为是中文的短文，所以使用 \verb|ctexart|，并用 \verb|[UTF8]| 选项说明编码。
+
+\subsubsection{填写正文}
+\label{subsub:填写正文}
+
+\begin{itemize}
+\item
+  使用空行分段。
+\item
+  单个换行并不会使文字另起一段，而只是起到使源代码更易读的作用（上面的代码每行 35 个汉字）。
+\item
+  段前不用打空格，\LaTeX 会自动完成文字的缩进。
+  即使手工在前面打了空格，\LaTeX 也会将其忽略，事实上它会忽略每行开始的所有空格。
+  也不要使用全角的汉字空格，这通常会使排版的效果变得糟糕。
+\item
+  通常汉字后面的空格会被忽略，其他符号后面的空格则保留。
+\item
+  使用 \verb|xelatex| 编译文档时，\verb|ctexart| 文档类会调用 \verb|xeCJK| 宏包，自动处理汉字与其他符号之间的距离，无论你有没有在它们之间加上正确的空格，这是十分方便的。
+  不过，在源代码中仍然可以给汉字与其他符号之间加上一个空格，这会令代码更加清晰。
+\end{itemize}
+
+\subsubsection{命令与环境}
+\label{subsub:命令与环境}
+
+继续排版短文的第 1 节，我们来处理脚注和引用内容。
+脚注用脚注命令 \verb|\footnote| 得到的。
+使用 \verb|\emph| 命令改变字体形状，表示强调(emphasis)的内容。
+引用的内容则是在正文中使用 \verb|quote| 环境得到的。
+不过，如果只使用 \verb|quote| 环境，并不能达到预想的效果：\verb|quote| 环境并不改变引用内容的字体。
+因此还需要再使用改变字体的命令，即：
+\begin{verbatim}
+\begin{quote}
+\zihao{-5}\kaishu 引用的内容。
+\end{quote}
+\end{verbatim}
+文章的摘要也是在 \verb|\maketitle| 之后用 \verb|abstract| 环境生成的：
+\begin{verbatim}
+\begin{abstract}
+  摘要
+\end{abstract}
+\end{verbatim}
+
+使用定理，要先在导言区定义：
+\begin{verbatim}
+\newtheorem{thm}{定理}
+\end{verbatim}
+然后这样使用：
+\begin{verbatim}
+\begin{thm}[我的定理]
+  定理内容
+\end{thm}
+\end{verbatim}
+
+最后来注意一个小细节，前面在表示起迄年份时，用了两个减号 \verb|--|，这在 \LaTeX 中将输出一个“en dash”，即宽度与字母“n”相当的短线，通常用来表示数字的范围。
+
+\subsubsection{遭遇数学公式}
+\label{subsub:遭遇数学公式}
+
+现在来看我们最关心的问题————输入数学公式，这大概是多数使用 \LaTeX 的人花费精力最多的地方了。
+最简单的输入公式的办法是把公式用一对美元符号 \verb|$$| 括起来。
+这种夹在行文中的公式称为“正文公式”(in-text formula)或“行内公式”(inline formula)。
+对比较长或比较重要的公式，一般则单独居中写在一行；为了方便引用，经常还给公式编号。
+这种公式被称作“显示公式”或“列表公式”(displayed formula)，使用 \verb|equation| 环境就可以方便地输入这种公式：
+\begin{verbatim}
+\begin{equation}
+  a(b+c) = ab + ac
+\end{equation}
+\end{verbatim}
+
+\subsubsection{使用图表}
+\label{subsub:使用图表}
+
+首先来看插图。
+在 \LaTeX 中使用插图有两种途径，一是插入事先准备好的图片，二是使用 \LaTeX 代码直接在文档中画图。
+大部分情况下都是使用插入外部图片的方式，只在一些特别的情况大量用代码作图（如数学的交换图）。
+插图功能不是由 \LaTeX 的内核直接提供，而是由 \verb|graphicx| 宏包提供的。
+要使用 \verb|graphicx| 宏包的插图功能，需要在源文件的导言区使用 \verb|\usepackage| 命令引入宏包：
+\begin{verbatim}
+\usepackage{graphicx}
+\end{verbatim}
+引入 \verb|graphicx| 宏包后，就可以使用 \verb|\includegraphics| 命令插图了：
+\begin{verbatim}
+\includegraphics[width=3cm]{xiantu. pdf}
+\end{verbatim}
+然而插入的图形就是一个有内容的矩形盒子，在正文中和一个很大的字符没有多少区别。
+因此会把插图和文件混在一起。
+除了一些很小的标志图形，我们很少把插图直接夹在文字之中，而是使用单独的环境列出。
+而且很大的图形如果固定位置，会给分页造成困难。
+因此，通常都把图形放在一个可以变动相对位置的环境中，称为浮动体(float)。
+在浮动体中还可以给图形加入说明性的标题，因此，在《杂谈勾股定理》中实际是使用下面的代码插图的：
+\begin{verbatim}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[scale=0.6]{xiantu. pdf}
+  \caption{宋赵爽在《周髀算经》注中作的弦图（仿制），该图给出了勾股定理的一个极具对称美的证明。}
+  
+  \label{fig: xiantu}
+\end{figure}
+\end{verbatim}
+在上面的代码中，第 1 行和第 7 行使用了 \verb|figure| 环境，就是插图使用的浮动体环境。
+\verb|figure| 环境有可选参数 \verb|[ht]|，表示浮动体可以出现在环境周围的文本所在处(here)和一页的顶部(top)。
+\verb|figure| 环境内部相当于普通的段落（默认没有缩进）；
+第 2 行用声明 \verb|\centering| 表示后面的内容居中；
+第 3 行插入图形；
+第 4 行和第 5 行使用 \verb|\caption| 命令给插图加上自动编号和标题；
+第 6 行的 \verb|\label| 命令则给图形定义一个标签，使用这个标签就可以在文章的其他地方引用 \verb|\caption| 产生的编号（编号引用我们会在后面讲到）。
+采纳 \cmark。
+
+下面再来看表格。
+插图可以用其他软件做好插入，但表格一般都还是直接在 \LaTeX 里面完成的。
+制作表格，需要确定的是表格的行、列对齐模式和表格线，这是由 \verb|tabular| 环境完成的：
+\begin{tabular}{|rrr|}
+\hline
+直角边 $a$ &直角边 $b$ &斜边 $c$ \\
+\hline
+3&4&5\\
+5&12&13\\
+\hline
+\end{tabular}
+
+
+本打算从 1.2 节开始看，但是我急需存放演示代码，所以跳转到刘海洋前辈教材 \cite{刘海洋2013latex} 的 2.2.5 小节看看。
+
+
+\subsection{2.1.5水平间距与盒子}%
+\label{sub:2.1.5水平间距与盒子}
+
+\paragraph{如何正确地使用水平间距}%
+\label{par:如何正确地使用水平间距}
+
+\paragraph{TeX的长度单位}%
+\label{par:TeX的长度单位}
+
+\TeX 的长度单位有如下几种：
+pt，pc 相当于四号字大小，in inch 英寸。
+\footnote{修改建议：改成列表}
+
+最重要的长度单位是 em，全身长度，表示字号对应的长度，本义是大写字母 M 的长度。
+我们可以这样检验它：
+\begin{verbatim}
+M \quad\quad\quad M
+\end{verbatim}
+M M M M M\\
+MMMM~~~~M\\
+M~\quad~\quad~\quad~M\\
+MMMMM\\
+M\quad\quad\quad{\!}M\\
+M\quad\quad{\quad}M\\
+M\quad\quad\quad~M\\
+M\quad\quad\quad{\enskip}M\\
+M\quad\quad\quad\!M\\
+M\quad\quad\quad{\,}M\\
+M\qquad\quad{M}\\
+
+最简单的命令是 \verb|\mbox{<内容>}|，产生一个盒子，内容左右模式排列，不允许断行：
+\mbox{aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa}。
+
+\begin{verbatim}
+\makebox[<宽度>][<位置>]{<内容>}
+\end{verbatim}
+
+
+\subsection{2.2.5抄录和代码环境}%
+\label{sub:2.2.5抄录和代码环境}
+
+\paragraph{先学会演示代码}%
+\label{par:请先学会演示代码}
+
+为什么我们需要 2.2.5 小节的知识，因为有时候我们必须经常性地使用特殊符号。
+在 2.2.5 小节，刘海洋前辈介绍了抄录功能 verbatim。
+在抄录环境里，我们能随意打印特殊符号。
+
+\verb|\verb| 命令可用来表示行文中的抄录，它的语法是这样的：
+\begin{verbatim}
+\verb<符号><抄录内容><符号>
+\end{verbatim}
+其中，这里的符号可以是 \verb|"|、\verb|!|、\verb"|" 等。
+\footnote{改进建议：我希望把语法演示部分放在框框里}
+
+另一方面，大段抄录则可以使用 \verb|\verbatim| 环境。
+它的语法是这样的：
+\begin{verbatim}
+begin{verbatim}
+<抄录内容>
+end{verbatim}
+\end{verbatim}
+\footnote{改进建议：暂时我没法展示它的语法，因为我没法在 verbatim 环境里嵌套 verbatim。}
+
+至此，我们所要求的基本功能已经实现了。
+我们对这个命令并不满意，理想中的代码演示环境：
+\begin{enumerate}
+  \item 
+    能演示几乎所有代码，包括 \verb|verbatim| 环境
+  \item 
+    其次它最好能用框框框起来，左边是代码，右边是效果
+  \item 
+    它要能智能换行
+\end{enumerate}
+
+\paragraph{如何在抄录环境里显式显示空格}%
+\label{par:如何在抄录环境里显式显示空格}
+
+使用带星号的命令 \verb|\verb*| 使得输出的空格可见：\verb*| |。
+同样可以使用带星号的 \verb|verbatim*| 环境输出可见空格：
+\begin{verbatim*}
+  hey, guy!
+\end{verbatim*}
+
+\paragraph{抄录环境和其他环境能否相互嵌套}%
+\label{par:抄录环境和其他环境能否相互嵌套}
+
+首先，\verb|verbatim| 环境并不能放在框框里。
+因为抄录命令 \verb|\verb| 和 \verb|verbatim| 环境，一般不能作为其他命令的参数。
+例如，\verb|\fbox{\verb!abc!}| 会报错
+\begin{quote}
+\zihao{-5}\kaishu
+LaTeX Error: \verb illegal in argument.
+\end{quote}
+\verb|\fbox{<输入文本>}| 的效果是把输入文本放在框里，例如 \verb|\fbox{框里的文字}| 效果为 \fbox{框里的文字}。
+\footnote{改进建议：把代码及其效果放在框里}
+
+但是可以使用 fancyvrb 宏包提供的命令，使用 \verb|lrbox| 环境把它们保存在自定义盒子里面，参考 2.1.5 节。
+
+\begin{verbatim}
+\SaveVerb{myverb}|#$%^&|
+\fbox{套中 \UseVerb{myverb}}。
+\end{verbatim}
+其效果为
+\SaveVerb{myverb}|#$%^&|
+\fbox{套中 \UseVerb{myverb}}。
+fracyvrb 宏包功能强大，可参考文档 Zandt \cite{van2010fancyvrb}。
+
+也可以利用 cprotect 宏包，它定义了 \verb|\cprotect| 等命令，可以方便地在其他命令参数中使用 \verb|\verb| 命令或者 \verb|verbatim| 环境。
+\verb|\cprotect| 命令用在带参数的命令前，用于保护参数：\verb!\cprotect\fbox{套中 \verb|#$%^&|}!，其效果为 \cprotect\fbox{套中 \verb|#$%^&|}。
+看起来，\verb|\cprotect| 更方便，但是它的限制更多，在一些命令 \verb|\parbox| 依然需要先保存再使用的方式。
+
+\paragraph{实现verb的简写}%
+\label{par:实现verb的简写}
+
+shortvrb 宏包提供了 \verb|\verb| 的简写形式，可以使用 \verb|\MakeShortVerb<符号>| 来定义简写，\verb|\DeleteShortVerb<符号>| 来取消定义。
+
+我还很想知道，怎么生成一个 box。
+
+\paragraph{排版支持语法高亮的程序代码}%
+\label{par:排版支持语法高亮的程序代码}
+
+支持语法高亮功能的 listings 宏包。
+%暂且不管，先用最基本的命令，行内代码使用 \verb|\verb| 命令，行间代码使用 \verb|\verbatim| 环境。
+
+listing 宏包支持的基本功能是 \verb|lstlisting| 环境。
+不过没有做任何设置的时候，\verb|lstlisting| 环境没有语法高亮的效果而且看起来比 \verb|verbatim| 环境还要难看。
+怎么让 \verb|lstlisting| 环境更好看呢？
+可以设置它的可选参数，也可以使用 \verb|\lstset{<设置>}| 进行全局设置：
+\begin{verbatim}
+\begin{lstlisting}[language=C]
+/* hello.c */
+#include <stdio.h>
+main() {
+    printf("Hello.\n");
+}
+\end{lstlisting}
+\end{verbatim}
+如此，C 语言的注释用斜体排出，关键字用粗体排出。
+进一步，\verb|basicstyle| 选项可以设置整体格式，\verb|keywordstyle| 选项设置关键字，\verb|stringstyle| 设置字符串，\verb|identifierstyle| 设置标识符，\verb|commenstyle| 设置注释。\footnote{似乎更适合采用表格形式}。
+
+为什么我看教材看得这么慢，这么痛苦？
+因为我没有目标，也没有疑问。
+明天早上起来学习，这样就有压力了。
+
+接着看回刘海洋前辈教材的第1.2节。
+写文章自然首先考虑文章的结构，具体地说，我们要写一篇科技论文，它的结构包括标题、摘要、目录，正文、参考文献。
+有结构是好事，我希望我的文字有统一的结构，这样将会方便我后期进行统一处理。
+然后它问我，我可以完成这样一个任务嘛？按照他的愿望，我需要自己的文章有主要的五大结构，其次还要能插入文字、公式、图片、表格等形式，最后设置页面大小，四合一。
+难点有哪些呢？
+首先是文章的结构，其次是文章的内容，最后是页面也就是视图方面的设置。
+
+首先是文章的总体说明，文章采用的编码格式、文件名、文章的描述：
+\begin{verbatim}
+%-*- coding: UTF-8 -*-
+% gougu.tex
+% 勾股定理
+\documentclass[UTF8]{ctexart}
+\end{verbatim}
+其次是文章的标题、作者、日期：
+\begin{verbatim}
+\title{}
+\author{}
+\date{\today}
+\end{verbatim}
+然后是文章的核心分块，\verb|doucment|，必须要生成标题和目录：
+\begin{verbatim}
+\begin{document}
+\maketitle
+\tableofcontents
+\end{document}
+\end{verbatim}
+此外，打印文献的位置也是固定的。
+\begin{verbatim}
+\bibliographystyle{plain}
+\bibliography{math}
+\end{verbatim}
+毫无疑问，这些都是初始化必要的，可以写入 \verb|snippets|，关键字 \verb|init| 扩展为这些内容。
+
+摘要部分有专门的环境：
+\begin{verbatim}
+\begin{abstract}
+这是一篇短文。
+\end{abstract}
+\end{verbatim}
+其效果为：
+\begin{abstract}
+这是一篇短文。
+\end{abstract}
+
+输入文字的原则：
+\begin{enumerate}
+\item
+  空行用来分段
+\item
+  单个换行相当于空格
+\item
+  汉字后的空格会被忽略
+\item
+  不要在句子开头使用汉字的全角空格
+\item
+  在汉字与其他符号之间加入空格，可令代码更加清晰
+\end{enumerate}
+
+学会使用脚注和引用。
+脚注 \footnote{脚注} 由 \verb|\footnote{<脚注内容>}| 命令实现。
+\emph{强调} 由 \verb|\emph{<强调内容>}| 命令实现。
+
+\begin{verbatim}
+\begin{quote}
+引用部分由 \verb|quote| 环境实现。
+但是引用的部分不会改变引用内容的字体，因此需要结合 {\zihao{-5}
+\kaishu 改变字体的命令使用}。
+\end{quote}
+\end{verbatim}
+其效果为：
+\begin{quote}
+引用部分由 \verb|quote| 环境实现。
+但是引用的部分不会改变引用内容的字体，因此需要结合 {\zihao{-5}\kaishu 改变字体的命令使用}。
+\end{quote}
+
+输入数学公式是我的强项，但是怎么使用表格就很难。
+插入图片由宏包 graphicx 提供：
+\begin{verbatim}
+\usepackage{graphicx}
+
+\includegraphics[width=3cm]{xiantu.pdf}
+\end{verbatim}
+这种情况可能会导致插图和文字混在一起。
+实际上，我们很少把插图直接夹在文字中，而是使用单独的环境列出。
+还可以加入说明性的文字：
+\begin{verbatim}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[scale=0.6]{xiantu.pdf}
+  \caption{<自动编号和标题>}
+  \label{<定义标签>}
+\end{figure}
+\end{verbatim}
+
+插入表格：
+\begin{verbatim}
+\begin{tabular}{|rrr|}
+ \hline
+ <1> & <2> & <3> \\
+ \hline
+ <4> & <5> & <6> \\
+ <7> & <8> & <9>
+ \hline
+\end{tabular}
+\end{verbatim}
+如果不想让表格浮动，可以这样
+\begin{verbatim}
+\begin{table}[H]
+\begin{tabular}{|rrr|}
+ \hline
+ <1> & <2> & <3> \\
+ \hline
+ <4> & <5> & <6> \\
+ <7> & <8> & <9>
+ \hline
+\end{tabular}
+\end{table}
+\end{verbatim}
+
+gvim 似乎不能调用。
+
+\bibliography{latex}
+
+\end{document}

@@ -1,0 +1,48 @@
+priority 0
+
+global !p
+# 用以计算符号占位大小的函数
+def get_display_width(s):
+    width = 0
+    for char in s:
+        # 计算字符的显示宽度
+        if unicodedata.east_asian_width(char) in ['F', 'W']:  # 全宽字符（中文、日文、韩文）
+            width += 2
+        else:  # 半宽字符（拉丁字母、数字等）
+            width += 1
+    return width
+endglobal
+
+snippet box "generate a nice box" bw
+`!p
+snip.rv = "#" * ( get_display_width(t[1]) + 4 )
+`
+# ${1:Your text here} #
+`!p
+snip.rv = "#" * ( get_display_width(t[1]) + 4 )
+`
+endsnippet
+
+
+
+
+
+# We use a little hack so that the snippet is expanded
+# and parsed correctly
+snippet usnip "Ultisnips snippet definition" b
+`!p snip.rv = "snippet"` ${1:Tab_trigger} "${2:Description}" ${3:b}
+${0:${VISUAL}}
+`!p snip.rv = "endsnippet"`
+endsnippet
+
+snippet global "Global snippet" b
+`!p snip.rv = "global"` !p
+${0:${VISUAL}}
+`!p snip.rv = "endglobal"`
+endsnippet
+
+snippet vis "${VISUAL}" i
+\$\{VISUAL${1:${2:default}${3:/transform/}}\}
+endsnippet
+
+# vim:ft=snippets:
